@@ -1,0 +1,5 @@
+[user]
+	name = Riatre
+	email = foo@riat.re
+[push]
+	default = simple
