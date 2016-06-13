@@ -33,6 +33,7 @@ set number
 "set cursorline
 "set cursorcolumn
 set scrolloff=4
+set termguicolors
 
 set background=dark
 
