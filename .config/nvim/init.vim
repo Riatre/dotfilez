@@ -1,6 +1,42 @@
 " -*- vim: set sts=2 sw=2 et fdm=marker: -------------  vim modeline -*-
 set nocompatible
 
+" Functions {{{
+function! Preserve(command) "{{{
+  " preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " do the business:
+  execute a:command
+  " clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction "}}}
+function! StripTrailingWhitespace() "{{{
+  call Preserve("%s/\\s\\+$//e")
+endfunction "}}}
+function! EnsureExists(path) "{{{
+  if !isdirectory(expand(a:path))
+    call mkdir(expand(a:path))
+  endif
+endfunction "}}}
+function! CloseWindowOrKillBuffer() "{{{
+  let number_of_windows_to_this_buffer = len(filter(range(1, winnr('$')), "winbufnr(v:val) == bufnr('%')"))
+
+  " never bdelete a nerd tree
+  if matchstr(expand("%"), 'NERD') == 'NERD'
+    wincmd c
+    return
+  endif
+
+  if number_of_windows_to_this_buffer > 1
+    wincmd c
+  else
+    bdelete
+  endif
+endfunction "}}}
+" }}}
 " vim-plug {{{
 
 " download vim-plug if missing
@@ -18,7 +54,14 @@ Plug 'vim-airline/vim-airline-themes'
 " Plug 'itchyny/lightline.vim'
 " Plug 'bling/vim-bufferline'
 Plug 'honza/vim-snippets'
-Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic', { 'on': [] }
+
+augroup load_on_insert
+  autocmd!
+  autocmd InsertEnter  * call plug#load('syntastic')
+        \| call deoplete#enable() | autocmd! load_on_insert
+augroup END
+
 Plug 'simnalamburt/vim-mundo'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'tpope/vim-commentary'
@@ -33,12 +76,24 @@ Plug 't9md/vim-choosewin'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'nanotech/jellybeans.vim'
+Plug 'mihaifm/bufstop'
+Plug 'qpkorr/vim-bufkill'
+
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'tpope/vim-sensible'
 
 call plug#end()
 
 " }}}
 " Editor Behaviour {{{
+set timeoutlen=300
+set ttimeoutlen=50
+set encoding=utf-8
+set autoread
+
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -49,18 +104,17 @@ set expandtab
 set smarttab
 set incsearch
 set hlsearch
-set number
-set cursorline
-"set cursorcolumn
 set scrolloff=4
 
-set showcmd
 set hidden
 set confirm
-set title
 
 set ignorecase
 set smartcase
+
+set wildmenu
+set wildmode=list:full
+set wildignorecase
 
 set mouse=a
 
@@ -71,11 +125,20 @@ endif
 
 autocmd BufEnter * lcd %:p:h
 " }}}
-" Color Scheme {{{
+" UI Configuration {{{
 set background=dark
 colorscheme jellybeans
 set termguicolors
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+set noshowmode
+set showcmd
+set title
+set number
+set cursorline
+"set cursorcolumn
+set showmatch
+set lazyredraw
+
 " }}}
 " Keybindings {{{
 noremap <C-\> :VimFilerExplorer<CR>
@@ -86,6 +149,10 @@ map <Leader><Space> <Leader><Leader>
 noremap <C-S> :w<CR>
 set pastetoggle=<F11>
 nmap Y y$
+nnoremap <C-p> :Unite file_rec/async<CR>
+nnoremap <Leader>/ :Unite grep:.<CR>
+
+
 " For smooth transition
 inoremap <C-BS> <C-w>
 
@@ -93,21 +160,64 @@ inoremap <A-h> <Left>
 inoremap <A-j> <Down>
 inoremap <A-k> <Up>
 inoremap <A-l> <Right>
+
+map <C-J> :bnext<CR>
+map <C-K> :bprev<CR>
+
+nnoremap <Leader>` :Unite -quick-match buffer<CR>
+nnoremap <Leader>q :BD<CR>
+nnoremap <Leader>o :e 
+nnoremap <Leader>n :ene<CR>
+
+nnoremap <Leader>v :vsplit<CR>
+nnoremap <Leader>s :split<CR>
+nnoremap <Leader>vsa :vert sba<CR>
+
+" window killer
+nnoremap <silent> Q :call CloseWindowOrKillBuffer()<cr>
+
+" formatting shortcuts
+nmap <leader>fef :call Preserve("normal gg=G")<CR>
+nmap <leader>f$ :call StripTrailingWhitespace()<CR>
+vmap <Leader>s :sort<CR>
+nnoremap <Leader>w :w<CR>
+
+map <Leader>tn :tabnew<CR>
+map <Leader>tc :tabclose<CR>
+
+" reselect visual block after indent
+vnoremap < <gv
+vnoremap > >gv
+
+" reselect last paste
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+
+" find current word in quickfix
+nnoremap <leader>fw :execute "vimgrep ".expand("<cword>")." %"<cr>:copen<cr>
+" find last search in quickfix
+nnoremap <leader>ff :execute 'vimgrep /'.@/.'/g %'<cr>:copen<cr>
+
+
+
 " }}}
-" Syntastic {{{
+" syntastic {{{
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%{syntasticstatuslineflag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_style_error_symbol = '✠'
+let g:syntastic_warning_symbol = '∆'
+let g:syntastic_style_warning_symbol = '≈'
 " }}}
 " EasyMotion {{{1
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
-nmap s <Plug>(easymotion-overwin-f)
+nmap s <Plug>(easymotion-overwin-f2)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
@@ -222,5 +332,7 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 " let g:airline#extensions#tabline#left_sep = ' '
 " let g:airline#extensions#tabline#left_alt_sep = '|'
 " }}}
-" vim: set foldmethod=marker :
+" Bufstop {{{
+let g:BufstopAutoSpeedToggle = 1
+" }}}
 
