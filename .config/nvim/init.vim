@@ -94,9 +94,6 @@ inoremap <A-j> <Down>
 inoremap <A-k> <Up>
 inoremap <A-l> <Right>
 " }}}
-" Undotree {{{
-let g:undotree_SetFocusWhenToggle = 1
-" }}}
 " Syntastic {{{
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
