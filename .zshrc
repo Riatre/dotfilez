@@ -108,6 +108,7 @@ alias pscp-gdm="pscp -x \"-i /home/riatre/victims/gdm-storages/keys/id_rsa\" --h
 alias ipy='ipython'
 alias bpy='bpython'
 alias lyc='ssh l.riat.re'
+alias vim='nvim'
 # }}}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
