@@ -56,12 +56,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'honza/vim-snippets'
 Plug 'scrooloose/syntastic', { 'on': [] }
 
-augroup load_on_insert
-  autocmd!
-  autocmd InsertEnter  * call plug#load('syntastic')
-        \| call deoplete#enable() | autocmd! load_on_insert
-augroup END
-
 Plug 'simnalamburt/vim-mundo'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'tpope/vim-commentary'
@@ -79,6 +73,7 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'mihaifm/bufstop'
 Plug 'qpkorr/vim-bufkill'
 Plug 'terryma/vim-expand-region'
+Plug 'chrisbra/NrrwRgn'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -86,11 +81,17 @@ endfunction
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'tpope/vim-sensible'
 
+augroup load_on_insert
+  autocmd!
+  autocmd InsertEnter * call deoplete#enable() 
+        \ | autocmd! load_on_insert
+augroup END
+
 call plug#end()
 
 " }}}
 " Editor Behaviour {{{
-set timeoutlen=300
+set timeoutlen=800
 set ttimeoutlen=50
 set encoding=utf-8
 set autoread

@@ -53,6 +53,7 @@ DISABLE_AUTO_TITLE="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git catimg common-aliases debian pip sudo urltools )
 source $ZSH/oh-my-zsh.sh
+unalias ag
 # }}}
 # Preference {{{
 
