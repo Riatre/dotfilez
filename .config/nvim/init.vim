@@ -56,12 +56,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'honza/vim-snippets'
 Plug 'scrooloose/syntastic', { 'on': [] }
 
-augroup load_on_insert
-  autocmd!
-  autocmd InsertEnter  * call plug#load('syntastic')
-        \| call deoplete#enable() | autocmd! load_on_insert
-augroup END
-
 Plug 'simnalamburt/vim-mundo'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'tpope/vim-commentary'
@@ -78,6 +72,8 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'nanotech/jellybeans.vim'
 Plug 'mihaifm/bufstop'
 Plug 'qpkorr/vim-bufkill'
+Plug 'terryma/vim-expand-region'
+Plug 'chrisbra/NrrwRgn'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -85,14 +81,21 @@ endfunction
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'tpope/vim-sensible'
 
+augroup load_on_insert
+  autocmd!
+  autocmd InsertEnter * call deoplete#enable() 
+        \ | autocmd! load_on_insert
+augroup END
+
 call plug#end()
 
 " }}}
 " Editor Behaviour {{{
-set timeoutlen=300
+set timeoutlen=800
 set ttimeoutlen=50
 set encoding=utf-8
 set autoread
+set matchtime=0
 
 set tabstop=4
 set softtabstop=4
@@ -124,6 +127,8 @@ if has("persistent_undo")
 endif
 
 autocmd BufEnter * lcd %:p:h
+
+set completeopt+=noinsert,longest,menuone
 " }}}
 " UI Configuration {{{
 set background=dark
@@ -173,6 +178,9 @@ nnoremap <Leader>v :vsplit<CR>
 nnoremap <Leader>s :split<CR>
 nnoremap <Leader>vsa :vert sba<CR>
 
+nnoremap <Leader>p "+p
+noremap <S-Insert> "+p
+
 " window killer
 nnoremap <silent> Q :call CloseWindowOrKillBuffer()<cr>
 
@@ -197,7 +205,8 @@ nnoremap <leader>fw :execute "vimgrep ".expand("<cword>")." %"<cr>:copen<cr>
 " find last search in quickfix
 nnoremap <leader>ff :execute 'vimgrep /'.@/.'/g %'<cr>:copen<cr>
 
-
+" Freaking Completion
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " }}}
 " syntastic {{{
@@ -328,9 +337,13 @@ let g:airline_powerline_fonts=1
 let g:airline_theme='jellybeans'
 
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#fnamecollapse=0
+let g:airline#extensions#tabline#fnametruncate=0
 let g:airline#extensions#tabline#buffer_nr_show = 1
-" let g:airline#extensions#tabline#left_sep = ' '
-" let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 " }}}
 " Bufstop {{{
 let g:BufstopAutoSpeedToggle = 1
