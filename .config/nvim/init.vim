@@ -176,7 +176,7 @@ nnoremap <Leader>n :ene<CR>
 
 nnoremap <Leader>v :vsplit<CR>
 nnoremap <Leader>s :split<CR>
-nnoremap <Leader>vsa :vert sba<CR>
+nnoremap <Leader>gvsa :vert sba<CR>
 
 nnoremap <Leader>p "+p
 noremap <S-Insert> "+p

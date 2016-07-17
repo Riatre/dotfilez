@@ -1,5 +1,7 @@
 [user]
 	name = Riatre
 	email = foo@riat.re
+[core]
+	editor = nvim
 [push]
 	default = simple
