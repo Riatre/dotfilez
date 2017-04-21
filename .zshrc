@@ -91,6 +91,16 @@ man() {
 
 # . /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh
 # }}}
+# Functions {{{
+# Overrides ssh and adjust $TERM, override xterm-termite with xterm-256color
+function ssh {
+    if [[ "${TERM}" == xterm-termite ]]; then
+        env TERM=xterm-256color /usr/bin/ssh "$@"
+    else
+        /usr/bin/ssh "$@"
+    fi
+}
+# # }}}
 # Language Extensions {{{
 
 # OPAM configuration
@@ -114,6 +124,8 @@ alias ipy='ipython'
 alias bpy='bpython'
 alias lyc='ssh l.riat.re'
 alias vim='nvim'
+alias emxc='emacsclient -nc'
+alias emx='emacsclient -t'
 # }}}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -121,3 +133,6 @@ alias vim='nvim'
 #unsetopt xtrace
 #exec 2>&3 3>&-
 # vim: set foldmethod=marker :
+
+export NVM_DIR="/home/riatre/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
