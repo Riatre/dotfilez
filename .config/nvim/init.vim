@@ -74,12 +74,21 @@ Plug 'mihaifm/bufstop'
 Plug 'qpkorr/vim-bufkill'
 Plug 'terryma/vim-expand-region'
 Plug 'chrisbra/NrrwRgn'
+Plug 'pangloss/vim-javascript'
+Plug 'kchmck/vim-coffee-script'
+Plug 'mileszs/ack.vim'
+Plug 'zchee/deoplete-jedi'
+Plug 'racer-rust/vim-racer'
+Plug 'Shougo/neoinclude.vim'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'tpope/vim-sensible'
+
+if !has('nvim') 
+  Plug 'tpope/vim-sensible'
+endif
 
 augroup load_on_insert
   autocmd!
@@ -134,11 +143,11 @@ set completeopt+=noinsert,longest,menuone
 set background=dark
 colorscheme jellybeans
 set termguicolors
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 set noshowmode
 set showcmd
 set title
 set number
+set relativenumber
 set cursorline
 "set cursorcolumn
 set showmatch
@@ -176,7 +185,7 @@ nnoremap <Leader>n :ene<CR>
 
 nnoremap <Leader>v :vsplit<CR>
 nnoremap <Leader>s :split<CR>
-nnoremap <Leader>gvsa :vert sba<CR>
+nnoremap <Leader>lvsa :vert sba<CR>
 
 nnoremap <Leader>p "+p
 noremap <S-Insert> "+p
@@ -207,6 +216,8 @@ nnoremap <leader>ff :execute 'vimgrep /'.@/.'/g %'<cr>:copen<cr>
 
 " Freaking Completion
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+nnoremap <Leader>g :Ack! 
 
 " }}}
 " syntastic {{{
@@ -348,4 +359,13 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 " Bufstop {{{
 let g:BufstopAutoSpeedToggle = 1
 " }}}
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
+if executable('ag')
+    let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden'
+    let g:unite_source_grep_recursive_opt=''
+endif
