@@ -126,6 +126,7 @@ alias lyc='ssh l.riat.re'
 alias vim='nvim'
 alias emxc='emacsclient -nc'
 alias emx='emacsclient -t'
+alias code='code-insiders'
 # }}}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
