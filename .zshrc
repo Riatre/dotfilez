@@ -58,13 +58,11 @@
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
+PURE_GIT_PULL=0
 # }}}
 # Preference {{{
 
-export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
-export PATH="$PATH:$HOME/lib-local/bin:$HOME/.local/bin:$HOM/.go/bin"
-export PATH="/home/riatre/lib-local/ctf-tools/bin:$PATH"
-export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
+export PATH="$HOME/lib-local/bin:$HOME/lib-local/ctf-tools/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 export MINICOM="-m -c on"
@@ -123,12 +121,11 @@ alias pscp-gdm="pscp -x \"-i /home/riatre/victims/gdm-storages/keys/id_rsa\" --h
 alias ipy='ipython'
 alias bpy='bpython'
 alias lyc='ssh l.riat.re'
-alias vim='nvim'
 alias emxc='emacsclient -nc'
 alias emx='emacsclient -t'
 # }}}
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source ~/transfer.sh
 
 #unsetopt xtrace
 #exec 2>&3 3>&-
