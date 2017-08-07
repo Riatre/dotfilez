@@ -80,6 +80,7 @@ Plug 'mileszs/ack.vim'
 Plug 'zchee/deoplete-jedi'
 Plug 'racer-rust/vim-racer'
 Plug 'Shougo/neoinclude.vim'
+Plug 'will133/vim-dirdiff'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
