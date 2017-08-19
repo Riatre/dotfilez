@@ -2,12 +2,10 @@
 	"segments": {
 		"right": [
 			{
-				"function": "powerline.segments.common.sys.uptime",
-				"priority": 50
+				"function": "powerline.segments.common.net.external_ip"
 			},
 			{
-				"function": "powerline.segments.common.sys.system_load",
-				"priority": 50
+				"function": "powerline.segments.common.sys.system_load"
 			},
 			{
 				"function": "powerline.segments.common.bat.battery"
