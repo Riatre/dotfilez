@@ -1,12 +1,21 @@
-# zmodload zsh/zprof
+zmodload zsh/zprof
 # setopt xtrace prompt_subst
 # exec 3>&2 2>/tmp/startlog.$$
 # PS4='+$EPOCHREALTIME %N:%i> '
 
 # zgen Plugins {{{
-source ~/.zgen/zgen.zsh
+# Load zgen only if a user types a zgen command
+zgen () {
+	if [[ ! -s ${ZDOTDIR:-${HOME}}/.zgen/zgen.zsh ]]; then
+		git clone --recursive https://github.com/tarjoilija/zgen.git ${ZDOTDIR:-${HOME}}/.zgen
+	fi
+	source ${ZDOTDIR:-${HOME}}/.zgen/zgen.zsh
+	zgen "$@"
+}
 
-if ! zgen saved; then
+if [[ -s ${ZDOTDIR:-${HOME}}/.zgen/init.zsh ]]; then
+  source ${ZDOTDIR:-${HOME}}/.zgen/init.zsh
+else
   zgen load "willghatch/zsh-saneopt"
 
   export ZGEN_PREZTO_LOAD_DEFAULT=0
@@ -16,19 +25,20 @@ if ! zgen saved; then
   zgen prezto completion
 
   # Plugins
+  zgen load "junegunn/fzf" shell
+  zgen load "rupa/z"
+  zgen load "andrewferrier/fzf-z"
   zgen load "mafredri/zsh-async" # Used by pure theme 
   zgen load "zsh-users/zsh-completions"
   zgen load "b4b4r07/enhancd"
   zgen load "zsh-users/zaw"
   # zgen load "jedahan/ripz"
-  zgen load "junegunn/fzf" shell
-  zgen load "knu/z"
-  zgen load "andrewferrier/fzf-z"
   zgen load "lukechilds/zsh-nvm"
 
   # Prompt
   # zgen load "zsh-users/zsh-autosuggestions" # laggy
-  zgen load "zsh-users/zsh-syntax-highlighting"
+  # zgen load "zsh-users/zsh-syntax-highlighting"
+  zgen load "zdharma/fast-syntax-highlighting"
   zgen load "zsh-users/zsh-history-substring-search"
   zgen load "Riatre/pure"
 
@@ -38,7 +48,7 @@ if ! zgen saved; then
   if ! [ -s "$HOME/.zgen/junegunn/fzf-master/bin/fzf" ]; then
     $HOME/.zgen/junegunn/fzf-master/install --bin
   fi
-    export PATH=$PATH:$HOME/.zgen/junegunn/fzf-master/bin
+  export PATH=$PATH:$HOME/.zgen/junegunn/fzf-master/bin
   echo 'export PATH=$PATH:$HOME/.zgen/junegunn/fzf-master/bin' >> $HOME/.zgen/init.zsh
 fi
 #}}}
