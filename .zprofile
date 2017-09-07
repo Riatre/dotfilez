@@ -1,1 +1,0 @@
-/home/riatre/.zprezto/runcoms/zprofile
