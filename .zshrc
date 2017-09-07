@@ -116,7 +116,7 @@ alias emx='emacsclient -t'
 # Unmanaged Language Extensions {{{
 # python-virtualenv wrapper
 export WORKON_HOME=$HOME/.virtualenv
-source /usr/local/bin/virtualenvwrapper_lazy.sh
+[ -s "/usr/local/bin/virtualenvwrapper_lazy.sh" ] && source /usr/local/bin/virtualenvwrapper_lazy.sh
 
 # Go
 export GOPATH="$HOME/.go"
