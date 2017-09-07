@@ -1,4 +1,4 @@
-zmodload zsh/zprof
+# zmodload zsh/zprof
 # setopt xtrace prompt_subst
 # exec 3>&2 2>/tmp/startlog.$$
 # PS4='+$EPOCHREALTIME %N:%i> '
