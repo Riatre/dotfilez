@@ -1,0 +1,73 @@
+{
+  "window.menuBarVisibility": "toggle",
+  "editor.fontFamily": "Iosevka, Inziu Iosevka SC",
+  "editor.fontSize": 16,
+  "editor.tabSize": 2,
+  "editor.cursorStyle": "line-thin",
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.formatOnPaste": true,
+  "editor.acceptSuggestionOnEnter": "smart",
+  "editor.fontLigatures": true,
+  "workbench.activityBar.visible": false,
+  "workbench.colorTheme": "Boxy Tomorrow",
+  "workbench.startupEditor": "newUntitledFile",
+  "editor.lineHeight": 20,
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#232426",
+    "statusBar.noFolderBackground": "#232426",
+    "statusBar.debuggingBackground": "#232426",
+    "sideBar.background": "#232426",
+    "tab.inactiveBackground": "#232426",
+    "statusBar.foreground": "#919293",
+    "tab.activeForeground": "#d2d2d2"
+  },
+  "vscode_custom_css.imports": [
+    "file:///C:/Users/Riatre/Documents/.vscode/compact-ui.css",
+    "file:///C:/Users/Riatre/Documents/.vscode/force-grayscale-antialias.css",
+    "file:///C:/Users/Riatre/Documents/.vscode/line-number-color.css",
+    "file:///C:/Users/Riatre/Documents/.vscode/no-feedback-icon.css"
+  ],
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\bash.exe",
+  "python.autoComplete.preloadModules": [
+    "pwn"
+  ],
+  "python.linting.enabledWithoutWorkspace": false,
+  "bracketPairColorizer.consecutivePairColors": [
+    "()",
+    "[]",
+    "{}",
+    [
+      "#8abeb7",
+      "#c16868",
+      "#488ec8",
+      "DarkSeaGreen"
+    ],
+    "Red"
+  ],
+  "bracketPairColorizer.colorMode": "Independent",
+  "bracketPairColorizer.independentPairColors": [
+    [
+      "()",
+      [
+        "#8abeb7",
+        "#c16868",
+        "#488ec8",
+        "DarkSeaGreen"
+      ],
+      "Red"
+    ],
+    [
+      "[]",
+      [
+        "#8abeb7",
+        "#c16868",
+        "#488ec8",
+        "DarkSeaGreen"
+      ],
+      "Red"
+    ]
+  ],
+  "python.formatting.provider": "yapf",
+  "python.jediPath": "C:\\Python27\\lib\\site-packages",
+  "C_Cpp.intelliSenseEngine": "Default"
+}
