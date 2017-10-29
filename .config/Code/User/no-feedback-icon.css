@@ -1,0 +1,3 @@
+.monaco-shell .statusbar-item>.dropdown.send-feedback>.dropdown-label.send-feedback {
+  display: none;
+}

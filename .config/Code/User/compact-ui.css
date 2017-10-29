@@ -1,0 +1,27 @@
+.monaco-workbench>.part.editor>.content>.one-editor-silo>.container>.title .tabs-container>.tab {
+  height: 28px;
+}
+
+.monaco-workbench>.part>.title>.title-label {
+  line-height: 28px;
+}
+
+.monaco-workbench>.part.editor>.content>.one-editor-silo>.container>.title .editor-actions .action-label,
+.monaco-workbench>.part.editor>.content>.one-editor-silo>.container>.title .title-actions .action-label {
+  height: 28px;
+  line-height: 28px;
+  min-width: 22px;
+}
+
+.monaco-workbench>.part.editor>.content>.one-editor-silo>.container>.title .tabs-container {
+  height: 28px;
+}
+
+.monaco-workbench>.part.editor>.content>.one-editor-silo>.container>.title,
+.monaco-workbench>.part>.title {
+  height: 28px;
+}
+
+.__CUSTOM_CSS_JS_INDICATOR_CLS {
+  display: none !important;
+}
