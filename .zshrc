@@ -3,6 +3,8 @@
 # exec 3>&2 2>/tmp/startlog.$$
 # PS4='+$EPOCHREALTIME %N:%i> '
 
+unsetopt BG_NICE # WSL does not support nice(5) for now.
+
 # zgen Plugins {{{
 # Load zgen only if a user types a zgen command
 zgen () {
