@@ -109,7 +109,7 @@ bindkey -M emacs '^N' history-substring-search-down
 
 alias ipy='ipython'
 alias bpy='bpython'
-alias rtr='ssh h.riat.re'
+alias rtr='ssh mov.eaxe.cx'
 alias emxc='emacsclient -nc'
 alias emx='emacsclient -t'
 # }}}

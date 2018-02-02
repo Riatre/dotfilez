@@ -6,3 +6,7 @@
 	default = simple
 [core]
 	editor = vim
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
