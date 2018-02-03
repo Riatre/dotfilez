@@ -157,6 +157,11 @@ man() {
   LESS_TERMCAP_us=$'\E[04;38;5;146m' \
   man "$@"
 }
+
+if [[ ! -z "${RIATRE_FROM_HOST}" ]]; then
+    export DISPLAY=172.23.33.1:0
+fi
+
 # }}}
 
 # unsetopt xtrace
