@@ -111,7 +111,7 @@ bindkey -M emacs '^N' history-substring-search-down
 
 alias ipy='ipython'
 alias bpy='bpython'
-alias rtr='ssh h.riat.re'
+alias rtr='ssh mov.eaxe.cx'
 alias emxc='emacsclient -nc'
 alias emx='emacsclient -t'
 # }}}
@@ -159,6 +159,11 @@ man() {
   LESS_TERMCAP_us=$'\E[04;38;5;146m' \
   man "$@"
 }
+
+if [[ ! -z "${RIATRE_FROM_HOST}" ]]; then
+    export DISPLAY=172.23.33.1:0
+fi
+
 # }}}
 
 # unsetopt xtrace
