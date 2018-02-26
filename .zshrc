@@ -160,6 +160,8 @@ man() {
 
 if [[ ! -z "${RIATRE_FROM_HOST}" ]]; then
     export DISPLAY=172.23.33.1:0
+    export LIBGL_ALWAYS_INDIRECT=1
+    xset r rate 200 66
 fi
 
 # }}}
