@@ -91,8 +91,6 @@ export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
 export PURE_GIT_PULL=0
 export NVM_LAZY_LOAD=true
 
-export PATH="$HOME/.go/bin:$HOME/lib-local/bin:$HOME/lib-local/ctf-tools/bin:$PATH"
-
 export MINICOM="-m -c on"
 
 EDITOR='vim'
@@ -161,7 +159,7 @@ man() {
 if [[ ! -z "${RIATRE_FROM_HOST}" ]]; then
     export DISPLAY=172.23.33.1:0
     export LIBGL_ALWAYS_INDIRECT=1
-    xset r rate 200 66
+    # xset r rate 200 66
 fi
 
 # }}}
