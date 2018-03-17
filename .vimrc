@@ -77,7 +77,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-eunuch'
 
 " Nice to have
-Plug 'Shougo/vimfiler.vim', { 'on': 'VimFilerExplorer' }
+Plug 'scrooloose/nerdtree'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'mileszs/ack.vim'
 Plug 'will133/vim-dirdiff'
@@ -86,7 +86,6 @@ Plug 'will133/vim-dirdiff'
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
-" Plug 'roxma/nvim-completion-manager'
 Plug 'honza/vim-snippets'
 Plug 'scrooloose/syntastic', { 'on': [] }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
@@ -154,7 +153,7 @@ set lazyredraw
 
 " }}}
 " Keybindings {{{
-noremap <C-\> :VimFilerExplorer<CR>
+noremap <C-\> :NERDTreeToggle<CR>
 noremap <F1> :MundoToggle<CR>
 nmap - <Plug>(choosewin)
 map <Space> <Leader>
@@ -177,7 +176,7 @@ inoremap <A-l> <Right>
 map <C-J> :bnext<CR>
 map <C-K> :bprev<CR>
 
-nnoremap <Leader>` :Denite -quick-match buffer<CR>
+nnoremap <Leader>` :Denite buffer<CR>
 nnoremap <Leader>q :BD<CR>
 nnoremap <Leader>o :e 
 nnoremap <Leader>n :ene<CR>
