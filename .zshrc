@@ -3,6 +3,18 @@
 # exec 3>&2 2>/tmp/startlog.$$
 # PS4='+$EPOCHREALTIME %N:%i> '
 
+# Plugin Preferences {{{
+
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='underline'
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='none'
+export PURE_GIT_PULL=0
+export NVM_LAZY_LOAD=true
+export ZSH_AUTOSUGGEST_USE_ASYNC=1
+export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
+export _Z_NO_PROMPT_COMMAND=yes
+
+# }}}
 # zgen Plugins {{{
 # Load zgen only if a user types a zgen command
 zgen () {
@@ -30,9 +42,7 @@ else
   zgen load "andrewferrier/fzf-z"
   zgen load "mafredri/zsh-async" # Used by pure theme 
   zgen load "zsh-users/zsh-completions"
-  zgen load "b4b4r07/enhancd"
   zgen load "zsh-users/zaw"
-  # zgen load "jedahan/ripz"
   zgen load "lukechilds/zsh-nvm"
 
   # Prompt
@@ -78,18 +88,10 @@ setopt share_history # share command history data
 #}}}
 # Preference {{{
 
-HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
-HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='underline'
-HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='none'
 setopt autocd
 setopt magic_equal_subst
 setopt promptcr
 setopt promptsp
-
-export ZSH_AUTOSUGGEST_USE_ASYNC=1
-export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
-export PURE_GIT_PULL=0
-export NVM_LAZY_LOAD=true
 
 export MINICOM="-m -c on"
 
@@ -161,6 +163,13 @@ if [[ ! -z "${RIATRE_FROM_HOST}" ]]; then
     export LIBGL_ALWAYS_INDIRECT=1
     # xset r rate 200 66
 fi
+
+_z_chpwd_handler() {
+  (_z --add "${PWD:a}" &)
+}
+
+autoload -U add-zsh-hook
+add-zsh-hook chpwd _z_chpwd_handler
 
 # }}}
 
