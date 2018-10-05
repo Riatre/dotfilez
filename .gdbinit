@@ -4,6 +4,7 @@ set history filename ~/.gdbhist
 
 set disassembly-flavor intel
 add-auto-load-safe-path /usr/share/go-1.8/src/runtime/runtime-gdb.py
+add-auto-load-safe-path /home/riatre/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib//etc/
 
 python
 class IgnoreErrorsCommand (gdb.Command):
