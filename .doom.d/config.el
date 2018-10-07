@@ -9,3 +9,4 @@
    (setq etcc-use-blink nil)
    (evil-terminal-cursor-changer-activate))
 
+(map! :leader :prefix "f" :n "s" 'save-buffer)
