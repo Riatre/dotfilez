@@ -10,3 +10,7 @@
    (evil-terminal-cursor-changer-activate))
 
 (map! :leader :prefix "f" :n "s" 'save-buffer)
+
+(when window-system (set-frame-size (selected-frame) 160 48))
+(load-theme 'sanityinc-tomorrow-night t)
+(setq confirm-kill-emacs nil)
