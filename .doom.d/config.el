@@ -14,3 +14,4 @@
 (when window-system (set-frame-size (selected-frame) 160 48))
 (load-theme 'sanityinc-tomorrow-night t)
 (setq confirm-kill-emacs nil)
+(setq doom-modeline-height 30)
