@@ -47,7 +47,6 @@ else
 
   # Prompt
   # zgen load "zsh-users/zsh-autosuggestions" # laggy
-  # zgen load "zsh-users/zsh-syntax-highlighting"
   zgen load "zdharma/fast-syntax-highlighting"
   zgen load "zsh-users/zsh-history-substring-search"
   zgen load "Riatre/pure"
@@ -159,6 +158,7 @@ man() {
 }
 
 if [[ ! -z "${RIATRE_FROM_HOST}" ]]; then
+    unset RIATRE_FROM_HOST
     export DISPLAY=172.23.33.1:0
     export LIBGL_ALWAYS_INDIRECT=1
     # xset r rate 200 66

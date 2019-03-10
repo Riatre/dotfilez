@@ -43,13 +43,11 @@ typeset -gU cdpath fpath mailpath path
 
 # Set the list of directories that Zsh searches for programs.
 path=(
-  $HOME/.cargo/bin
-  $HOME/.local/bin
-  $HOME/.go/bin
-  $HOME/lib-local/bin
-  $HOME/lib-local/ctf-tools/bin
+  $HOME/{.local,.cargo,.go}/bin
   /usr/local/{bin,sbin}
   $path
+  $HOME/lib-local/ctf-tools/bin
+  $HOME/lib-local/depot_tools
 )
 
 #
