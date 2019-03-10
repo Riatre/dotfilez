@@ -94,8 +94,6 @@ setopt promptsp
 
 export MINICOM="-m -c on"
 
-EDITOR='vim'
-
 # }}}
 # Keybindings & Alias {{{
 _zsh_cli_fg() { fg; }
