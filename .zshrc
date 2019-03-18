@@ -98,6 +98,7 @@ export MINICOM="-m -c on"
 # Keybindings & Alias {{{
 _zsh_cli_fg() { fg; }
 zle -N _zsh_cli_fg
+bindkey -e
 bindkey '^Z' _zsh_cli_fg
 bindkey '^[OA' history-substring-search-up
 bindkey '^[OB' history-substring-search-down
