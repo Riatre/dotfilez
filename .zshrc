@@ -3,6 +3,7 @@
 # exec 3>&2 2>/tmp/startlog.$$
 # PS4='+$EPOCHREALTIME %N:%i> '
 
+bindkey -e
 # Plugin Preferences {{{
 
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
@@ -37,7 +38,8 @@ else
   zgen prezto completion
 
   # Plugins
-  zgen load "junegunn/fzf" shell
+  zgen load "junegunn/fzf" shell/completion.zsh
+  zgen load "junegunn/fzf" shell/key-bindings.zsh
   zgen load "rupa/z"
   zgen load "andrewferrier/fzf-z"
   zgen load "mafredri/zsh-async" # Used by pure theme 
@@ -98,7 +100,6 @@ export MINICOM="-m -c on"
 # Keybindings & Alias {{{
 _zsh_cli_fg() { fg; }
 zle -N _zsh_cli_fg
-bindkey -e
 bindkey '^Z' _zsh_cli_fg
 bindkey '^[OA' history-substring-search-up
 bindkey '^[OB' history-substring-search-down
