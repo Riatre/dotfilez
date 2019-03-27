@@ -31,6 +31,7 @@ if [[ -s ${ZDOTDIR:-${HOME}}/.zgen/init.zsh ]]; then
 else
   zgen load "willghatch/zsh-saneopt"
 
+  export ZGEN_PREZTO_REPO=Riatre/prezto
   export ZGEN_PREZTO_LOAD_DEFAULT=0
   zgen prezto '*:*' color 'yes'
   zgen prezto
@@ -167,7 +168,6 @@ if [[ ! -z "${RIATRE_FROM_HOST}" ]]; then
     unset RIATRE_FROM_HOST
     export DISPLAY=172.23.33.1:0
     export LIBGL_ALWAYS_INDIRECT=1
-    # xset r rate 200 66
 fi
 
 _z_chpwd_handler() {
