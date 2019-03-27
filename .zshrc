@@ -111,6 +111,12 @@ alias bpy='bpython'
 alias rtr='ssh mov.eaxe.cx'
 alias emxc='emacsclient -nc'
 alias emx='emacsclient -t'
+
+# fd-find in Debian is named /usr/bin/fdfind
+if (( $+commands[fdfind] && ! ($+commands[fd]) )); then
+    alias fd=fdfind
+fi
+
 # }}}
 # Unmanaged Language Extensions {{{
 # python-virtualenv wrapper
