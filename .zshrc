@@ -164,12 +164,6 @@ man() {
   man "$@"
 }
 
-if [[ ! -z "${RIATRE_FROM_HOST}" ]]; then
-    unset RIATRE_FROM_HOST
-    export DISPLAY=172.23.33.1:0
-    export LIBGL_ALWAYS_INDIRECT=1
-fi
-
 _z_chpwd_handler() {
   (_z --add "${PWD:a}" &)
 }
