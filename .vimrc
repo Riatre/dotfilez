@@ -131,7 +131,7 @@ if has("persistent_undo")
   set undofile
 endif
 
-autocmd BufEnter * lcd %:p:h
+set autochdir
 
 set completeopt+=noinsert,longest,menuone
 " }}}
