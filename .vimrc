@@ -64,10 +64,11 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'mihaifm/bufstop'
 Plug 'majutsushi/tagbar'
 Plug 'Shougo/denite.nvim'
+Plug 'scrooloose/nerdtree'
 
 " Basic Editing
 Plug 'simnalamburt/vim-mundo'
-Plug 'tpope/vim-commentary'
+Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'easymotion/vim-easymotion'
 Plug 'chrisbra/NrrwRgn'
@@ -77,9 +78,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-eunuch'
 
 " Nice to have
-Plug 'scrooloose/nerdtree'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'mileszs/ack.vim'
+Plug 'dyng/ctrlsf.vim'
 Plug 'will133/vim-dirdiff'
 
 " Languages
@@ -89,8 +89,6 @@ endif
 Plug 'honza/vim-snippets'
 Plug 'scrooloose/syntastic', { 'on': [] }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'racer-rust/vim-racer'
-Plug 'pangloss/vim-javascript'
 
 call plug#end()
 
@@ -159,6 +157,7 @@ set lazyredraw
 " Keybindings {{{
 noremap <C-\> :NERDTreeToggle<CR>
 noremap <F1> :MundoToggle<CR>
+noremap <F8> :TagbarToggle<CR>
 nmap - <Plug>(choosewin)
 map <Space> <Leader>
 map <Leader><Space> <Leader><Leader>
@@ -219,10 +218,12 @@ nnoremap <leader>ff :execute 'vimgrep /'.@/.'/g %'<cr>:copen<cr>
 " Freaking Completion
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-nnoremap <Leader>g :Ack! 
+nmap <Leader>g <Plug>CtrlSFPrompt
+nmap <Leader>h :CtrlSFToggle<CR>
+vmap <C-F>f <Plug>CtrlSFVwordExec
 
 " }}}
-" syntastic {{{
+" Syntastic {{{
 set statusline+=%#warningmsg#
 set statusline+=%{syntasticstatuslineflag()}
 set statusline+=%*
@@ -244,9 +245,6 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
 " }}}
-" vimfiler {{{
-let g:vimfiler_as_default_explorer = 1
-" }}}
 " vim-airline {{{
 let g:airline_powerline_fonts=1
 let g:airline_theme='jellybeans'
@@ -263,6 +261,3 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 " Bufstop {{{
 let g:BufstopAutoSpeedToggle = 1
 " }}}
-if executable('rg')
-  let g:ackprg = 'rg --vimgrep --no-heading'
-endif
