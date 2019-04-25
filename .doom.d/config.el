@@ -15,3 +15,7 @@
 (load-theme 'sanityinc-tomorrow-night t)
 (setq confirm-kill-emacs nil)
 (setq doom-modeline-height 30)
+
+(setq lsp-ui-sideline-show-hover nil)
+(setq lsp-ui-sideline-show-symbol nil)
+(setq company-minimum-prefix-length 2)
