@@ -1,8 +1,6 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
 (setq doom-font (font-spec :family "Sarasa Mono SC" :size 24))
-(def-package! company)
-(setq company-idle-delay 0)
 
 (def-package! evil-terminal-cursor-changer
   :init
@@ -14,8 +12,10 @@
 (when window-system (set-frame-size (selected-frame) 160 48))
 (load-theme 'sanityinc-tomorrow-night t)
 (setq confirm-kill-emacs nil)
-(setq doom-modeline-height 30)
 
-(setq lsp-ui-sideline-show-hover nil)
-(setq lsp-ui-sideline-show-symbol nil)
-(setq company-minimum-prefix-length 2)
+(setq doom-modeline-height 25
+      doom-modeline-icon nil)
+
+(setq lsp-ui-sideline-show-hover nil
+      lsp-ui-sideline-show-symbol nil
+      lsp-ui-doc-enable nil)
