@@ -51,7 +51,7 @@ call plug#begin('~/.vim/plugged')
 " Polyfill
 if !has('nvim') 
   Plug 'tpope/vim-sensible'
-  " Plug 'roxma/vim-hug-neovim-rpc'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
 " UI
@@ -78,17 +78,14 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-eunuch'
 
 " Nice to have
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'dyng/ctrlsf.vim'
 Plug 'will133/vim-dirdiff'
 
 " Languages
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-endif
-Plug 'honza/vim-snippets'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/syntastic', { 'on': [] }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'honza/vim-snippets'
 
 call plug#end()
 
