@@ -82,7 +82,7 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'will133/vim-dirdiff'
 
 " Languages
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/syntastic', { 'on': [] }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'honza/vim-snippets'
