@@ -129,6 +129,10 @@ endif
 set autochdir
 
 set completeopt+=noinsert,longest,menuone
+
+autocmd FileType python setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType cpp setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType c setlocal shiftwidth=2 tabstop=2 softtabstop=2
 " }}}
 " UI Configuration {{{
 set termguicolors
