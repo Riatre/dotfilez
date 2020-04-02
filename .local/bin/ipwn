@@ -1,4 +1,4 @@
-#!/usr/bin/ipython -i
+#!/usr/bin/ipython3 -i
 
 import os, sys
 
@@ -7,4 +7,4 @@ from pwn import *
 
 context(arch = 'amd64', endian = 'little', os = 'linux', log_level = 'debug', word_size = 64)
 
-print ''
+print('')
