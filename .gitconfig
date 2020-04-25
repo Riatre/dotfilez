@@ -2,6 +2,7 @@
 	name = Riatre Foo
 	email = foo@riat.re
 [core]
+    excludesfile = ~/.gitignore_global
 [push]
 	default = simple
 [core]
