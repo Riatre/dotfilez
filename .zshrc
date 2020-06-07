@@ -4,6 +4,7 @@
 # PS4='+$EPOCHREALTIME %N:%i> '
 
 bindkey -e
+(( $+functions[add-zsh-hook] )) || autoload -Uz add-zsh-hook
 # Plugin Preferences {{{
 
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
@@ -140,7 +141,19 @@ source ~/transfer.sh
 
 # direnv
 # optional bootstrap: $SUDO apt install direnv
-(( $+commands[direnv] )) && eval "$(direnv hook zsh)"
+if (( $+commands[direnv] )) && ! (( $+functions[_direnv_hook] )); then
+    eval "$(direnv hook zsh)"
+    (( $+functions[_direnv_hook] )) || echo "broken direnv: no _direnv_hook function after init"
+    add-zsh-hook -d precmd _direnv_hook
+
+    function _self_destruct_direnv_hook {
+        _direnv_hook
+        # remove self from precmd
+        precmd_functions=(${(@)precmd_functions:#_self_destruct_direnv_hook})
+        builtin unfunction _self_destruct_direnv_hook
+    }
+    precmd_functions=(_self_destruct_direnv_hook ${precmd_functions[@]})
+fi
 # }}}
 # Hacks {{{
 # Overrides ssh and adjust $TERM, override xterm-termite with xterm-256color
@@ -168,9 +181,7 @@ _z_chpwd_handler() {
   (_z --add "${PWD:a}" &)
 }
 
-autoload -U add-zsh-hook
 add-zsh-hook chpwd _z_chpwd_handler
-
 # }}}
 
 # unsetopt xtrace
