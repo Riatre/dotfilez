@@ -54,6 +54,9 @@ else
   zgen load "zsh-users/zsh-history-substring-search"
   zgen load "Riatre/pure"
 
+  # Troubleshooting
+  zgen load "romkatv/zsh-prompt-benchmark"
+
   zgen save
 
   # binaries
@@ -112,6 +115,9 @@ alias bpy='bpython'
 alias rtr='ssh mov.eaxe.cx'
 alias emxc='emacsclient -nc'
 alias emx='emacsclient -t'
+alias factorz='python -m primefac'
+alias bazel='bazelisk'
+alias vol='python ~/lib-local/volatility/vol.py'
 
 # fd-find in Debian is named /usr/bin/fdfind
 if (( $+commands[fdfind] && ! ($+commands[fd]) )); then
@@ -119,10 +125,10 @@ if (( $+commands[fdfind] && ! ($+commands[fd]) )); then
 fi
 
 # }}}
-# Unmanaged Language Extensions {{{
+# Dev {{{
 # python-virtualenv wrapper
 export WORKON_HOME=$HOME/.virtualenv
-[ -s "/usr/local/bin/virtualenvwrapper_lazy.sh" ] && source /usr/local/bin/virtualenvwrapper_lazy.sh
+(( $+commands[virtualenvwrapper_lazy.sh] )) && source virtualenvwrapper_lazy.sh
 
 # Go
 export GOPATH="$HOME/.go"
@@ -130,18 +136,12 @@ export GOPATH="$HOME/.go"
 # NodeJS, nvm is managed by zsh-nvm
 export NVM_DIR="$HOME/.nvm"
 
-# Emscripten
-export EMSDK_DIR="$HOME/lib-local/emsdk-portable"
-function emcc() {
-  source $EMSDK_DIR/emsdk_env.sh
-  unset -f emcc
-  emcc "$@"
-}
-[ -s "$EMSDK_DIR/emsdk_env.sh" ] || unset -f emcc
-# }}}
-# Unmanaged Helpers {{{
 source ~/transfer.sh
-#}}}
+
+# direnv
+# optional bootstrap: $SUDO apt install direnv
+(( $+commands[direnv] )) && eval "$(direnv hook zsh)"
+# }}}
 # Hacks {{{
 # Overrides ssh and adjust $TERM, override xterm-termite with xterm-256color
 function ssh {

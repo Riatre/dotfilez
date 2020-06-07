@@ -46,8 +46,6 @@ path=(
   $HOME/{.local,.cargo,.go}/bin
   /usr/local/{bin,sbin}
   $path
-  $HOME/lib-local/ctf-tools/bin
-  $HOME/lib-local/depot_tools
 )
 
 #
