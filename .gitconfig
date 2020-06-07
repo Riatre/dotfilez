@@ -11,3 +11,5 @@
 	rebase = true
 [rebase]
 	autoStash = true
+[merge]
+	conflictstyle = diff3
