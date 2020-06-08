@@ -120,6 +120,9 @@ alias factorz='python -m primefac'
 alias bazel='bazelisk'
 alias vol='python ~/lib-local/volatility/vol.py'
 
+function mkcd() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
+compdef _directories mkcd
+
 # fd-find in Debian is named /usr/bin/fdfind
 if (( $+commands[fdfind] && ! ($+commands[fd]) )); then
     alias fd=fdfind
