@@ -182,6 +182,10 @@ _z_chpwd_handler() {
 }
 
 add-zsh-hook chpwd _z_chpwd_handler
+
+# Dedup $PATH again, it's way easier than fixing all the scripts (nix.sh etc)
+typeset -aU path
+
 # }}}
 
 # unsetopt xtrace
