@@ -91,6 +91,36 @@ setopt hist_verify
 setopt inc_append_history
 setopt share_history # share command history data
 
+# From romkatv/zsh4humans
+function -z4h-with-local-history() {
+    local last=$LASTWIDGET
+    zle .set-local-history -n $1
+    shift
+    {
+          () { local -h LASTWIDGET=$last; "$@" } "$@"
+      } always {
+        zle .set-local-history -n 0
+    }
+    return 0
+}
+zle -N -- -with-local-history
+function z4h-up-local-history() {
+  -z4h-with-local-history 1 history-substring-search-up "$@"
+}
+function z4h-down-local-history() {
+  -z4h-with-local-history 1 history-substring-search-down "$@"
+}
+function z4h-up-global-history() {
+  -z4h-with-local-history 0 history-substring-search-up "$@"
+}
+function z4h-down-global-history() {
+  -z4h-with-local-history 0 history-substring-search-down "$@"
+}
+zle -N z4h-up-local-history
+zle -N z4h-down-local-history
+zle -N z4h-up-global-history
+zle -N z4h-down-global-history
+
 #}}}
 # Preference {{{
 
@@ -106,10 +136,12 @@ export MINICOM="-m -c on"
 _zsh_cli_fg() { fg; }
 zle -N _zsh_cli_fg
 bindkey '^Z' _zsh_cli_fg
-bindkey '^[OA' history-substring-search-up
-bindkey '^[OB' history-substring-search-down
-bindkey -M emacs '^P' history-substring-search-up
-bindkey -M emacs '^N' history-substring-search-down
+bindkey '^[OA' z4h-up-local-history
+bindkey '^[OB' z4h-down-local-history
+bindkey -M emacs '^P' z4h-up-local-history
+bindkey -M emacs '^N' z4h-down-local-history
+bindkey '^[[1;5A' z4h-up-global-history
+bindkey '^[[1;5B' z4h-down-global-history
 
 alias ipy='ipython'
 alias bpy='bpython'
