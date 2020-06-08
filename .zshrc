@@ -56,7 +56,7 @@ else
   zgen load "Riatre/pure"
 
   # Troubleshooting
-  zgen load "romkatv/zsh-prompt-benchmark"
+  # zgen load "romkatv/zsh-prompt-benchmark"
 
   zgen save
 
