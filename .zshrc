@@ -125,16 +125,43 @@ zle -N z4h-down-global-history
 # Preference {{{
 
 setopt autocd
+setopt autopushd pushdsilent pushdignoredups
 setopt magic_equal_subst
 setopt promptcr
 setopt promptsp
 
 export MINICOM="-m -c on"
 
-# }}}
-# Keybindings & Alias {{{
+function -z4h-redraw-prompt() {
+    zle .reset-prompt
+    zle -R
+}
+zle -N -- -z4h-redraw-prompt
+function -z4h-cd-rotate() {
+    {
+        while (( $#dirstack )) && ! pushd -q $1 &>/dev/null; do popd -q $1; done
+        (( $#dirstack ))
+    } && {
+        local f
+        for f in chpwd "${chpwd_functions[@]}"; do
+            [[ "${+functions[$f]}" == 0 ]] || "$f" &>/dev/null || true
+        done
+    } && -z4h-redraw-prompt
+}
+zle -N -- -z4h-cd-rotate
+function z4h-cd-back() { -z4h-cd-rotate +1 }
+function z4h-cd-forward() { -z4h-cd-rotate -0 }
+function z4h-cd-up() { cd .. && -z4h-redraw-prompt }
+zle -N z4h-cd-back
+zle -N z4h-cd-forward
+zle -N z4h-cd-up
+
 _zsh_cli_fg() { fg; }
 zle -N _zsh_cli_fg
+
+# }}}
+# Keybindings & Alias {{{
+
 bindkey '^Z' _zsh_cli_fg
 bindkey '^[OA' z4h-up-local-history
 bindkey '^[OB' z4h-down-local-history
@@ -142,6 +169,10 @@ bindkey -M emacs '^P' z4h-up-local-history
 bindkey -M emacs '^N' z4h-down-local-history
 bindkey '^[[1;5A' z4h-up-global-history
 bindkey '^[[1;5B' z4h-down-global-history
+bindkey '^[[1;3D' z4h-cd-back
+bindkey '^[[1;3C' z4h-cd-forward
+bindkey '^[[1;3A' z4h-cd-up
+bindkey '^[[1;3B' fzf-cd-widget
 
 alias ipy='ipython'
 alias bpy='bpython'
@@ -161,7 +192,7 @@ if (( $+commands[fdfind] && ! ($+commands[fd]) )); then
 fi
 
 # }}}
-# Dev {{{
+# Environment Managers {{{
 # python-virtualenv wrapper
 export WORKON_HOME=$HOME/.virtualenv
 (( $+commands[virtualenvwrapper_lazy.sh] )) && source virtualenvwrapper_lazy.sh
