@@ -2,4 +2,5 @@
 .ccls-cache
 .clangd
 .envrc
+*.zwc
 
