@@ -1,4 +1,4 @@
-#!/usr/bin/env ipython3 -i
+#!/usr/bin/env -S ipython3 -i
 
 import os, sys
 
