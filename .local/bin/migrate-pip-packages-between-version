@@ -1,0 +1,52 @@
+#!/bin/bash -e
+
+# Used for migrating pip packages installed in
+# /usr/local/lib/pythonX.Y/dist-packages and ~/.local/lib/pythonX.Y/ to another
+# Python version This is useful when your system Python version changes, for
+# example when default Python3 version moved to the next one in Debian testing.
+
+if [[ "$#" -ne 2 ]]; then
+    echo "Usage: $0 <old Python version> <new Python version>"
+    exit 1
+fi
+
+OLD="$1"
+NEW="$2"
+
+OLD_PIP="python$OLD -m pip"
+
+if ! $OLD_PIP --version; then
+    echo "$OLD_PIP failed, will try to use new pip to parse the old dist-packages."
+    OLD_PIP="python$NEW -m pip --isolated"
+fi
+
+if ! "python$NEW" -m pip --version; then
+    echo "python$NEW -m pip --version failed."
+    exit 2
+fi
+
+OLD_PACKAGES=$($OLD_PIP freeze --path "/usr/local/lib/python$OLD/dist-packages")
+OLD_USER_PACKAGES=$($OLD_PIP freeze --path "~/.local/lib/python$OLD/site-packages")
+
+install () {
+    PACKAGES="$1"
+    shift
+    SUDO="$1"
+    shift
+    FAILED=()
+    IFS=$'\n'
+    for PKG in $PACKAGES
+    do
+        if ! $SUDO "python$NEW" -m pip install "$@" "$PKG"; then
+            FAILED+=( "$PKG" )
+        fi
+    done
+    unset IFS
+    if [[ "${#FAILED[@]}" -gt 0 ]]; then
+        echo "Failed to install the following $@ packages: ${FAILED[@]}"
+    fi
+}
+
+install "$OLD_PACKAGES" sudo --system
+install "$OLD_USER_PACKAGES" "" --user
+
