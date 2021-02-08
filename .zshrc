@@ -30,6 +30,8 @@ zgen () {
 if [[ -s ${ZDOTDIR:-${HOME}}/.zgen/init.zsh ]]; then
   source ${ZDOTDIR:-${HOME}}/.zgen/init.zsh
 else
+  # Prezto do compinit for us.
+  export ZGEN_AUTOLOAD_COMPINIT=0
   zgen load "willghatch/zsh-saneopt"
 
   export ZGEN_PREZTO_REPO=Riatre/prezto
@@ -291,6 +293,7 @@ typeset -aU path
 
 # }}}
 
+# zprof
 # unsetopt xtrace
 # exec 2>&3 3>&-
 # vim: set foldmethod=marker :
