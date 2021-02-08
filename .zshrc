@@ -121,6 +121,44 @@ zle -N z4h-down-local-history
 zle -N z4h-up-global-history
 zle -N z4h-down-global-history
 
+# Fzf with multi-select from https://github.com/junegunn/fzf/pull/2098
+#
+sane-fzf-history-widget() {
+  local selected num selected_lines selected_line selected_line_arr
+  setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2> /dev/null
+
+  # Read history lines (split on newline) into selected_lines array.
+  selected_lines=(
+    "${(@f)$(fc -rl 1 | perl -ne 'print if !$seen{(/^\s*[0-9]+\**\s+(.*)/, $1)}++' |
+    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS --query=${(qqq)LBUFFER} -m" $(__fzfcmd))}"
+  )
+  local ret=$?
+
+  # Remove empty elements, converting ('') to ().
+  selected_lines=($selected_lines)
+  if [[ "${#selected_lines[@]}" -ne 0 ]]; then
+    local -a history_lines=()
+    for selected_line in "${selected_lines[@]}"; do
+      # Split each history line on spaces, and take the 1st value (history line number).
+      selected_line_arr=($=selected_line)
+      num=$selected_line_arr[1]
+      if [[ -n "$num" ]]; then
+        # Add history at line $num to history_lines array.
+        history_lines+=( "$(fc -ln $num $num)" )
+      fi
+    done
+    # Set input buffer to newline-separated list of history lines.
+    # Use echo to unescape, e.g. \n to newline, \t to tab.
+    BUFFER="$(echo ${(F)history_lines})"
+    # Move cursor to end of buffer.
+    CURSOR=$#BUFFER
+  fi
+
+  zle reset-prompt
+  return $ret
+}
+zle -N sane-fzf-history-widget
+
 #}}}
 # Preference {{{
 
@@ -173,6 +211,7 @@ bindkey '^[[1;3D' z4h-cd-back
 bindkey '^[[1;3C' z4h-cd-forward
 bindkey '^[[1;3A' z4h-cd-up
 bindkey '^[[1;3B' fzf-cd-widget
+bindkey '^R' sane-fzf-history-widget
 
 alias ipy='ipython'
 alias bpy='bpython'
