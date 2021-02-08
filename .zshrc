@@ -203,8 +203,6 @@ export GOPATH="$HOME/.go"
 # NodeJS, nvm is managed by zsh-nvm
 export NVM_DIR="$HOME/.nvm"
 
-source ~/transfer.sh
-
 # direnv
 # optional bootstrap: $SUDO apt install direnv
 if (( $+commands[direnv] )) && ! (( $+functions[_direnv_hook] )); then
