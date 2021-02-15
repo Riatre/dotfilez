@@ -13,3 +13,5 @@
 	autoStash = true
 [merge]
 	conflictstyle = diff3
+[credential]
+	helper = store --file ~/.my-credentials
