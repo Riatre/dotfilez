@@ -213,9 +213,9 @@ bindkey '^[[1;3D' z4h-cd-back
 bindkey '^[[1;3C' z4h-cd-forward
 bindkey '^[[1;3A' z4h-cd-up
 bindkey '^[[1;3B' fzf-cd-widget
-bindkey '^R' sane-fzf-history-widget
+# bindkey '^R' sane-fzf-history-widget
 
-alias ipy='ipython'
+alias ipy='ipython3'
 alias bpy='bpython'
 alias rtr='ssh mov.eaxe.cx'
 alias emxc='emacsclient -nc'

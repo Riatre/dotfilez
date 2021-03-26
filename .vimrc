@@ -76,6 +76,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-eunuch'
+Plug 'b4winckler/vim-angry'
 
 " Nice to have
 Plug 'dyng/ctrlsf.vim'
@@ -133,6 +134,8 @@ set completeopt+=noinsert,longest,menuone
 autocmd FileType python setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType cpp setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType c setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+set fileencodings=utf-8,gb18030,gbk
 " }}}
 " UI Configuration {{{
 set termguicolors
