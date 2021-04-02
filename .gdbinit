@@ -8,9 +8,9 @@ add-auto-load-safe-path /home/riatre/.rustup/toolchains/stable-x86_64-unknown-li
 
 python
 class IgnoreErrorsCommand (gdb.Command):
-    """Execute a single command, ignoring all errors.
+    '''Execute a single command, ignoring all errors.
 Only one-line commands are supported.
-This is primarily useful in scripts."""
+This is primarily useful in scripts.'''
 
     def __init__ (self):
         super (IgnoreErrorsCommand, self).__init__ ("ignore-errors",
@@ -27,5 +27,11 @@ This is primarily useful in scripts."""
 IgnoreErrorsCommand ()
 end
 
-ignore-errors source ~/lib-local/pwndbg/gdbinit.py
+python
+import os
+if os.getenv("GDB_GEF"):
+    gdb.execute("ignore-errors source ~/lib-local/gef/gef.py")
+elif not os.getenv("GDB_BARE"):
+    gdb.execute("ignore-errors source ~/lib-local/pwndbg/gdbinit.py")
+end
 
