@@ -1,0 +1,7 @@
+#!/bin/bash -e
+
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <image ref>"
+    exit 1
+fi
+docker run --rm --entrypoint /bin/sh "$1" -c 'cat $(ldd /bin/grep | grep libc.so.6 | awk "{print \$3}")'
