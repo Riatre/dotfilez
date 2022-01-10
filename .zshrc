@@ -15,6 +15,9 @@ export NVM_LAZY_LOAD=true
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
 export _Z_NO_PROMPT_COMMAND=yes
+if (( ${+commands[zoxide]} )); then
+    _USE_ZOXIDE=1
+fi
 
 # }}}
 # zgen Plugins {{{
@@ -44,8 +47,10 @@ else
   # Plugins
   zgen load "junegunn/fzf" shell/completion.zsh
   zgen load "junegunn/fzf" shell/key-bindings.zsh
-  zgen load "rupa/z"
-  zgen load "andrewferrier/fzf-z"
+  if [[ ! -v _USE_ZOXIDE ]]; then
+      zgen load "rupa/z"
+      zgen load "andrewferrier/fzf-z"
+  fi
   zgen load "mafredri/zsh-async" # Used by pure theme 
   zgen load "zsh-users/zsh-completions"
   zgen load "zsh-users/zaw"
@@ -70,6 +75,11 @@ else
   echo 'export PATH=$PATH:$HOME/.zgen/junegunn/fzf-master/bin' >> $HOME/.zgen/init.zsh
 fi
 #}}}
+# Zoxide {{{
+if [[ -v _USE_ZOXIDE ]]; then
+    eval "$(zoxide init zsh --hook pwd)"
+fi
+# }}}
 # History {{{
 
 HISTFILE=$HOME/.zsh_history
@@ -282,11 +292,13 @@ man() {
   man "$@"
 }
 
-_z_chpwd_handler() {
-  (_z --add "${PWD:a}" &)
-}
+if [[ ! -v _USE_ZOXIDE ]]; then
+    _z_chpwd_handler() {
+      (_z --add "${PWD:a}" &)
+    }
 
-add-zsh-hook chpwd _z_chpwd_handler
+    add-zsh-hook chpwd _z_chpwd_handler
+fi
 
 # Dedup $PATH again, it's way easier than fixing all the scripts (nix.sh etc)
 typeset -aU path
