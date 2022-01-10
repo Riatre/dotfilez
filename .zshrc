@@ -71,9 +71,9 @@ else
   if ! [ -s "$HOME/.zgen/junegunn/fzf-master/bin/fzf" ]; then
     $HOME/.zgen/junegunn/fzf-master/install --bin
   fi
-  export PATH=$PATH:$HOME/.zgen/junegunn/fzf-master/bin
-  echo 'export PATH=$PATH:$HOME/.zgen/junegunn/fzf-master/bin' >> $HOME/.zgen/init.zsh
 fi
+
+export PATH="$PATH:$HOME/.zgen/junegunn/fzf-master/bin"
 #}}}
 # Zoxide {{{
 if [[ -v _USE_ZOXIDE ]]; then
