@@ -71,15 +71,13 @@ else
   if ! [ -s "$HOME/.zgen/junegunn/fzf-master/bin/fzf" ]; then
     $HOME/.zgen/junegunn/fzf-master/install --bin
   fi
+  if [[ -v _USE_ZOXIDE ]]; then
+      zoxide init zsh --hook pwd >> "${ZDOTDIR:-${HOME}}/.zgen/init.zsh"
+  fi
 fi
 
 export PATH="$PATH:$HOME/.zgen/junegunn/fzf-master/bin"
 #}}}
-# Zoxide {{{
-if [[ -v _USE_ZOXIDE ]]; then
-    eval "$(zoxide init zsh --hook pwd)"
-fi
-# }}}
 # History {{{
 
 HISTFILE=$HOME/.zsh_history
