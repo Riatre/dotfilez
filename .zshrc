@@ -58,7 +58,7 @@ else
 
   # Prompt
   # zgen load "zsh-users/zsh-autosuggestions" # laggy
-  zgen load "zdharma/fast-syntax-highlighting"
+  zgen load "zdharma-continuum/fast-syntax-highlighting"
   zgen load "zsh-users/zsh-history-substring-search"
   zgen load "Riatre/pure"
 
@@ -269,14 +269,6 @@ if (( $+commands[direnv] )) && ! (( $+functions[_direnv_hook] )); then
 fi
 # }}}
 # Hacks {{{
-# Overrides ssh and adjust $TERM, override xterm-termite with xterm-256color
-function ssh {
-    if [[ "${TERM}" == xterm-termite ]]; then
-        env TERM=xterm-256color /usr/bin/ssh "$@"
-    else
-        /usr/bin/ssh "$@"
-    fi
-}
 
 unalias man
 man() {
