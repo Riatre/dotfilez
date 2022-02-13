@@ -64,5 +64,15 @@ if (( $#commands[(i)lesspipe(|.sh)] )); then
 fi
 
 # Nix
-if [ -e /home/riatre/.nix-profile/etc/profile.d/nix.sh ]; then . /home/riatre/.nix-profile/etc/profile.d/nix.sh; fi
+path_to_probe=(
+    $HOME/.nix-profile/etc/profile.d/nix.sh
+    /etc/profile.d/debuginfod.sh
+)
+for fn in $path_to_probe; do
+    if [[ -e "$fn" ]]; then
+        . "$fn"
+    fi
+done
+unset fn
+unset path_to_probe
 
