@@ -55,6 +55,7 @@ else
   zgen load "zsh-users/zsh-completions"
   zgen load "zsh-users/zaw"
   zgen load "lukechilds/zsh-nvm"
+  zgen load "spwhitt/nix-zsh-completions"
 
   # Prompt
   # zgen load "zsh-users/zsh-autosuggestions" # laggy
@@ -225,12 +226,22 @@ bindkey '^[[1;3B' fzf-cd-widget
 
 alias ipy='ipython3'
 alias bpy='bpython'
-alias rtr='ssh mov.eaxe.cx'
+alias rtr='ssh h.drone.riat.re'
 alias emxc='emacsclient -nc'
 alias emx='emacsclient -t'
 alias factorz='python -m primefac'
 alias bazel='bazelisk'
-alias vol='python ~/lib-local/volatility/vol.py'
+alias vol='python ~/lib/volatility/vol.py'
+
+if (( $+commands[git-branchless] )); then
+    function git() {
+        if [[ "$#" -eq 0 ]]; then
+            command git "$@"
+        else
+            git-branchless wrap -- "$@"
+        fi
+    }
+fi
 
 function mkcd() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories mkcd
