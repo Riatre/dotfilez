@@ -30,8 +30,8 @@ end
 python
 import os
 if os.getenv("GDB_GEF"):
-    gdb.execute("ignore-errors source ~/lib-local/gef/gef.py")
+    gdb.execute("ignore-errors source ~/lib/gef/gef.py")
 elif not os.getenv("GDB_BARE"):
-    gdb.execute("ignore-errors source ~/lib-local/pwndbg/gdbinit.py")
+    gdb.execute("ignore-errors source ~/lib/pwndbg/gdbinit.py")
 end
 

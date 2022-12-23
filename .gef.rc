@@ -9,7 +9,7 @@ grow_stack_down = False
 ignore_registers = 
 layout = legend regs stack code args source memory threads trace extra
 libc_args = True
-libc_args_path = /home/riatre/lib-local/gef-extras/glibc-function-args
+libc_args_path = /home/riatre/lib/gef-extras/glibc-function-args
 nb_lines_backtrace = 10
 nb_lines_backtrace_before = 2
 nb_lines_code = 6
@@ -38,7 +38,7 @@ clean_on_exit = False
 autosave_breakpoints_file = 
 debug = False
 disable_color = False
-extra_plugins_dir = /home/riatre/lib-local/gef-extras/scripts
+extra_plugins_dir = /home/riatre/lib/gef-extras/scripts
 follow_child = True
 readline_compat = False
 tempdir = /tmp/gef
@@ -73,7 +73,7 @@ length = 1024
 
 [pcustom]
 max_depth = 4
-struct_path = /home/riatre/lib-local/gef-extras/structs
+struct_path = /home/riatre/lib/gef-extras/structs
 structure_name = bold blue
 structure_size = green
 structure_type = bold red
@@ -82,7 +82,7 @@ structure_type = bold red
 ps_command = /bin/ps auxww
 
 [syscall-args]
-path = /home/riatre/lib-local/gef-extras/syscall-tables
+path = /home/riatre/lib/gef-extras/syscall-tables
 
 [theme]
 address_code = red
