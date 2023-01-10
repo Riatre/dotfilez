@@ -234,6 +234,10 @@ alias factorz='python -m primefac'
 alias bazel='bazelisk'
 alias vol='python ~/lib/volatility/vol.py'
 
+if (( $+commands[aws] )) && [[ -f "$HOME/.config/cloudflare-account-id" ]]; then
+    alias r2="aws --profile=cf --endpoint-url https://$(cat $HOME/.config/cloudflare-account-id).r2.cloudflarestorage.com s3"
+fi
+
 if (( $+commands[git-branchless] )); then
     function git() {
         if [[ "$#" -eq 0 ]]; then
