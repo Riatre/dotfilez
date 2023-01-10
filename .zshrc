@@ -62,6 +62,7 @@ else
   zgen load "zdharma-continuum/fast-syntax-highlighting"
   zgen load "zsh-users/zsh-history-substring-search"
   zgen load "Riatre/pure"
+  zgen load "Riatre/wezterm-shell-integration" assets/shell-integration/wezterm.sh main
 
   # Troubleshooting
   # zgen load "romkatv/zsh-prompt-benchmark"
