@@ -47,6 +47,6 @@ install () {
     fi
 }
 
-install "$OLD_PACKAGES" sudo --system
+install "$OLD_PACKAGES" sudo
 install "$OLD_USER_PACKAGES" "" --user
 
