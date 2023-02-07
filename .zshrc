@@ -260,7 +260,7 @@ fi
 # Environment Managers {{{
 # python-virtualenv wrapper
 export WORKON_HOME=$HOME/.virtualenv
-(( $+commands[virtualenvwrapper_lazy.sh] )) && source virtualenvwrapper_lazy.sh
+[[ -f /usr/share/virtualenvwrapper/virtualenvwrapper_lazy.sh ]] && source /usr/share/virtualenvwrapper/virtualenvwrapper_lazy.sh
 
 # Go
 export GOPATH="$HOME/.go"
