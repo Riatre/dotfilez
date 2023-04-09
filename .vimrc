@@ -63,8 +63,8 @@ Plug 't9md/vim-choosewin'
 Plug 'qpkorr/vim-bufkill'
 Plug 'mihaifm/bufstop'
 Plug 'majutsushi/tagbar'
-Plug 'Shougo/denite.nvim'
-Plug 'scrooloose/nerdtree'
+Plug 'Shougo/denite.nvim' " broken; find a replacement
+Plug 'scrooloose/nerdtree' " TODO: nvim migration
 
 " Basic Editing
 Plug 'simnalamburt/vim-mundo'
@@ -79,13 +79,12 @@ Plug 'tpope/vim-eunuch'
 Plug 'b4winckler/vim-angry'
 
 " Nice to have
-Plug 'dyng/ctrlsf.vim'
+Plug 'dyng/ctrlsf.vim' " this maps to https://github.com/nvim-pack/nvim-spectre in neovim
 Plug 'will133/vim-dirdiff'
 
-" Languages
+" Languages (TODO: nvim migration)
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/syntastic', { 'on': [] }
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'honza/vim-snippets'
 
 call plug#end()
