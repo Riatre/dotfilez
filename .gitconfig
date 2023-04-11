@@ -5,6 +5,7 @@
     excludesfile = ~/.gitignore_global
 [push]
 	default = simple
+	autoSetupRemote = true
 [core]
 	editor = vim
 [pull]
