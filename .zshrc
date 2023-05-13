@@ -35,6 +35,7 @@ zgen () {
     zgen "$@"
 }
 
+local FZF_COMMIT_SHA1="352ea072269dfe2a3c429785a95a2f22887ccda3"
 if [[ -s ${ZDOTDIR:-${HOME}}/.zgen/init.zsh ]]; then
   source ${ZDOTDIR:-${HOME}}/.zgen/init.zsh
 else
@@ -52,7 +53,6 @@ else
 
   # Plugins
   # fzf 0.38.0
-  FZF_COMMIT_SHA1="352ea072269dfe2a3c429785a95a2f22887ccda3"
   zgen load "junegunn/fzf" shell/completion.zsh "$FZF_COMMIT_SHA1"
   zgen load "junegunn/fzf" shell/key-bindings.zsh "$FZF_COMMIT_SHA1"
   if [[ ! -v _USE_ZOXIDE ]]; then
@@ -88,6 +88,7 @@ else
 fi
 
 export PATH="$PATH:$HOME/.zgen/junegunn/fzf-$FZF_COMMIT_SHA1/bin"
+unset FZF_COMMIT_SHA1
 #}}}
 # History {{{
 
