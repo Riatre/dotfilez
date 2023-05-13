@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo 'bash <(curl -sL https://raw.githubusercontent.com/TheLocehiliosan/yadm/2d4dcd05ef78b7f4776a89809774fda9d3b713d5/yadm) clone https://github.com/Riatre/dotfilez.git -f --bootstrap'
+
