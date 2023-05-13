@@ -24,7 +24,7 @@ fi
 # Load zgen only if a user types a zgen command
 zgen () {
 	if [[ ! -s ${ZDOTDIR:-${HOME}}/.zgen/zgen.zsh ]]; then
-		git clone --recursive https://github.com/tarjoilija/zgen.git ${ZDOTDIR:-${HOME}}/.zgen
+		git clone --recursive -b 76492ebc701fdcb7a48ae7c95a810cd6f55d5906 https://github.com/tarjoilija/zgen.git ${ZDOTDIR:-${HOME}}/.zgen
 	fi
 	source ${ZDOTDIR:-${HOME}}/.zgen/zgen.zsh
 	zgen "$@"
@@ -35,9 +35,10 @@ if [[ -s ${ZDOTDIR:-${HOME}}/.zgen/init.zsh ]]; then
 else
   # Prezto do compinit for us.
   export ZGEN_AUTOLOAD_COMPINIT=0
-  zgen load "willghatch/zsh-saneopt"
+  zgen load "willghatch/zsh-saneopt" saneopt.plugin.zsh 8ec7ce0387309dcdb72b71ac85edc8799aa42792
 
   export ZGEN_PREZTO_REPO=Riatre/prezto
+  export ZGEN_PREZTO_BRANCH=9156b35ee4886b3e9ef35e821da58ab723139432
   export ZGEN_PREZTO_LOAD_DEFAULT=0
   zgen prezto '*:*' color 'yes'
   zgen prezto
@@ -45,24 +46,27 @@ else
   zgen prezto completion
 
   # Plugins
-  zgen load "junegunn/fzf" shell/completion.zsh
-  zgen load "junegunn/fzf" shell/key-bindings.zsh
+  # fzf 0.38.0
+  FZF_COMMIT_SHA1="352ea072269dfe2a3c429785a95a2f22887ccda3"
+  zgen load "junegunn/fzf" shell/completion.zsh "$FZF_COMMIT_SHA1"
+  zgen load "junegunn/fzf" shell/key-bindings.zsh "$FZF_COMMIT_SHA1"
   if [[ ! -v _USE_ZOXIDE ]]; then
-      zgen load "rupa/z"
-      zgen load "andrewferrier/fzf-z"
+      zgen load "rupa/z" / b82ac78a2d4457d2ca09973332638f123f065fd1
+      zgen load "andrewferrier/fzf-z" / 37c655b2b3f488b88281cda4538292ffab6fd1e7
   fi
-  zgen load "mafredri/zsh-async" # Used by pure theme 
-  zgen load "zsh-users/zsh-completions"
-  zgen load "zsh-users/zaw"
-  zgen load "lukechilds/zsh-nvm"
-  zgen load "spwhitt/nix-zsh-completions"
+  zgen load "zsh-users/zsh-completions" / 449cc702dc0363cd8fc37cc2d1fdb422f6d4d0e8
+  zgen load "zsh-users/zaw" / c8e6e2a4244491a2b89c2524a2030336be8d7c7f
+  zgen load "lukechilds/zsh-nvm" / dda8bb6165553b17d997df29dcfa663668608178
+  zgen load "spwhitt/nix-zsh-completions" / 6a1bfc024481bdba568f2ced65e02f3a359a7692
 
   # Prompt
   # zgen load "zsh-users/zsh-autosuggestions" # laggy
-  zgen load "zdharma-continuum/fast-syntax-highlighting"
-  zgen load "zsh-users/zsh-history-substring-search"
-  zgen load "Riatre/pure"
-  zgen load "Riatre/wezterm-shell-integration" assets/shell-integration/wezterm.sh main
+  zgen load "zsh-users/zsh-history-substring-search" / 400e58a87f72ecec14f783fbd29bc6be4ff1641c
+  PURE_COMMIT_SHA1=f04e98a19cd9178ad1dd64c4f62351a06065bedb
+  zgen load "Riatre/pure" async.zsh "$PURE_COMMIT_SHA1"
+  zgen load "Riatre/pure" pure.zsh "$PURE_COMMIT_SHA1"
+  zgen load "Riatre/wezterm-shell-integration" assets/shell-integration/wezterm.sh 013fdc4d26cd8728678319ea6383e170e8bfe924
+  zgen load "zdharma-continuum/fast-syntax-highlighting" / 13d7b4e63468307b6dcb2dadf6150818f242cbff
 
   # Troubleshooting
   # zgen load "romkatv/zsh-prompt-benchmark"
@@ -70,15 +74,15 @@ else
   zgen save
 
   # binaries
-  if ! [ -s "$HOME/.zgen/junegunn/fzf-master/bin/fzf" ]; then
-    $HOME/.zgen/junegunn/fzf-master/install --bin
+  if ! [ -s "$HOME/.zgen/junegunn/fzf-$FZF_COMMIT_SHA1/bin/fzf" ]; then
+    "$HOME/.zgen/junegunn/fzf-$FZF_COMMIT_SHA1/install" --bin
   fi
   if [[ -v _USE_ZOXIDE ]]; then
       zoxide init zsh --hook pwd >> "${ZDOTDIR:-${HOME}}/.zgen/init.zsh"
   fi
 fi
 
-export PATH="$PATH:$HOME/.zgen/junegunn/fzf-master/bin"
+export PATH="$PATH:$HOME/.zgen/junegunn/fzf-$FZF_COMMIT_SHA1/bin"
 #}}}
 # History {{{
 
