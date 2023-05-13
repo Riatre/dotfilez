@@ -24,7 +24,12 @@ fi
 # Load zgen only if a user types a zgen command
 zgen () {
 	if [[ ! -s ${ZDOTDIR:-${HOME}}/.zgen/zgen.zsh ]]; then
-		git clone --recursive -b 76492ebc701fdcb7a48ae7c95a810cd6f55d5906 https://github.com/tarjoilija/zgen.git ${ZDOTDIR:-${HOME}}/.zgen
+        ZGEN_COMMIT="76492ebc701fdcb7a48ae7c95a810cd6f55d5906"
+        zgen_dir="${ZDOTDIR:-${HOME}}/.zgen"
+        git init --initial-branch master "${zgen_dir}"
+        git -C "${zgen_dir}" remote add origin https://github.com/tarjoilija/zgen.git
+        git -C "${zgen_dir}" fetch --depth 1 origin "${ZGEN_COMMIT}"
+        git -C "${zgen_dir}" checkout --recurse-submodules FETCH_HEAD
 	fi
 	source ${ZDOTDIR:-${HOME}}/.zgen/zgen.zsh
 	zgen "$@"
