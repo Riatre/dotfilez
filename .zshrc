@@ -11,10 +11,13 @@ HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='underline'
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='none'
 export PURE_GIT_PULL=0
-export NVM_LAZY_LOAD=true
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
 export _Z_NO_PROMPT_COMMAND=yes
+# fzf 0.38.0
+local FZF_COMMIT_SHA1="352ea072269dfe2a3c429785a95a2f22887ccda3"
+# Update $PATH one last time, before using ${+commands[...]} so we don't trigger rehash mid-zshrc.
+export PATH="$PATH:$HOME/.zgen/junegunn/fzf-$FZF_COMMIT_SHA1/bin"
 if (( ${+commands[zoxide]} )); then
     _USE_ZOXIDE=1
 fi
@@ -35,7 +38,6 @@ zgen () {
     zgen "$@"
 }
 
-local FZF_COMMIT_SHA1="352ea072269dfe2a3c429785a95a2f22887ccda3"
 if [[ -s ${ZDOTDIR:-${HOME}}/.zgen/init.zsh ]]; then
   source ${ZDOTDIR:-${HOME}}/.zgen/init.zsh
 else
@@ -51,27 +53,30 @@ else
   zgen prezto utility
   zgen prezto completion
 
-  # Plugins
-  # fzf 0.38.0
+  # Shell behaviour
   zgen load "junegunn/fzf" shell/completion.zsh "$FZF_COMMIT_SHA1"
   zgen load "junegunn/fzf" shell/key-bindings.zsh "$FZF_COMMIT_SHA1"
   if [[ ! -v _USE_ZOXIDE ]]; then
-      zgen load "rupa/z" / b82ac78a2d4457d2ca09973332638f123f065fd1
-      zgen load "andrewferrier/fzf-z" / 37c655b2b3f488b88281cda4538292ffab6fd1e7
+      zgen load "rupa/z" '' b82ac78a2d4457d2ca09973332638f123f065fd1
+      zgen load "andrewferrier/fzf-z" '' 37c655b2b3f488b88281cda4538292ffab6fd1e7
   fi
-  zgen load "zsh-users/zsh-completions" / 449cc702dc0363cd8fc37cc2d1fdb422f6d4d0e8
-  zgen load "zsh-users/zaw" / c8e6e2a4244491a2b89c2524a2030336be8d7c7f
-  zgen load "lukechilds/zsh-nvm" / dda8bb6165553b17d997df29dcfa663668608178
-  zgen load "spwhitt/nix-zsh-completions" / 6a1bfc024481bdba568f2ced65e02f3a359a7692
+  zgen load "zsh-users/zsh-completions" '' 449cc702dc0363cd8fc37cc2d1fdb422f6d4d0e8
+  zgen load "zsh-users/zaw" '' c8e6e2a4244491a2b89c2524a2030336be8d7c7f
+  zgen load "spwhitt/nix-zsh-completions" '' 6a1bfc024481bdba568f2ced65e02f3a359a7692
 
   # Prompt
   # zgen load "zsh-users/zsh-autosuggestions" # laggy
-  zgen load "zsh-users/zsh-history-substring-search" / 400e58a87f72ecec14f783fbd29bc6be4ff1641c
-  PURE_COMMIT_SHA1=f04e98a19cd9178ad1dd64c4f62351a06065bedb
+  zgen load "zsh-users/zsh-history-substring-search" '' 400e58a87f72ecec14f783fbd29bc6be4ff1641c
+  local PURE_COMMIT_SHA1=f04e98a19cd9178ad1dd64c4f62351a06065bedb
   zgen load "Riatre/pure" async.zsh "$PURE_COMMIT_SHA1"
   zgen load "Riatre/pure" pure.zsh "$PURE_COMMIT_SHA1"
   zgen load "Riatre/wezterm-shell-integration" assets/shell-integration/wezterm.sh 013fdc4d26cd8728678319ea6383e170e8bfe924
-  zgen load "zdharma-continuum/fast-syntax-highlighting" / 13d7b4e63468307b6dcb2dadf6150818f242cbff
+  zgen load "zdharma-continuum/fast-syntax-highlighting" '' 13d7b4e63468307b6dcb2dadf6150818f242cbff
+
+  # Tools
+  local ASDF_COMMIT_SHA1="0adc6c11fb4f87dbb476f8b61e4cf8fb7613599b"
+  zgen load "asdf-vm/asdf" asdf.sh $ASDF_COMMIT_SHA1
+  zgen load "asdf-vm/asdf" completions $ASDF_COMMIT_SHA1
 
   # Troubleshooting
   # zgen load "romkatv/zsh-prompt-benchmark"
@@ -87,7 +92,6 @@ else
   fi
 fi
 
-export PATH="$PATH:$HOME/.zgen/junegunn/fzf-$FZF_COMMIT_SHA1/bin"
 unset FZF_COMMIT_SHA1
 #}}}
 # History {{{
@@ -125,6 +129,8 @@ function -z4h-with-local-history() {
     }
     return 0
 }
+autoload -U up-line-or-beginning-search
+zle -N up-line-or-beginning-search
 zle -N -- -with-local-history
 function z4h-up-local-history() {
   -z4h-with-local-history 1 history-substring-search-up "$@"
@@ -245,7 +251,7 @@ alias bazel='bazelisk'
 alias vol='python ~/lib/volatility/vol.py'
 
 if (( $+commands[aws] )) && [[ -f "$HOME/.config/cloudflare-account-id" ]]; then
-    alias r2="aws --profile=cf --endpoint-url https://$(cat $HOME/.config/cloudflare-account-id).r2.cloudflarestorage.com s3"
+    alias r2="aws --profile=cf --endpoint-url https://$(<$HOME/.config/cloudflare-account-id).r2.cloudflarestorage.com s3"
 fi
 
 if (( $+commands[git-branchless] )); then
@@ -259,7 +265,6 @@ if (( $+commands[git-branchless] )); then
 fi
 
 function mkcd() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
-compdef _directories mkcd
 
 # fd-find in Debian is named /usr/bin/fdfind
 if (( $+commands[fdfind] && ! ($+commands[fd]) )); then
@@ -275,23 +280,31 @@ export WORKON_HOME=$HOME/.virtualenv
 # Go
 export GOPATH="$HOME/.go"
 
-# NodeJS, nvm is managed by zsh-nvm
-export NVM_DIR="$HOME/.nvm"
-
 # direnv
 # optional bootstrap: $SUDO apt install direnv
 if (( $+commands[direnv] )) && ! (( $+functions[_direnv_hook] )); then
-    eval "$(direnv hook zsh)"
-    (( $+functions[_direnv_hook] )) || echo "broken direnv: no _direnv_hook function after init"
-    add-zsh-hook -d precmd _direnv_hook
-
+	# Equivalent to `eval "$(direnv hook zsh)"`, then remove _direnv_hook from
+	# precmd and add _self_destruct_direnv_hook back in. Update the following block
+	# if the output of `direnv hook zsh` changes.
+	_direnv_hook() {
+	  trap -- '' SIGINT;
+	  eval "$(direnv export zsh)";
+	  trap - SIGINT;
+	}
     function _self_destruct_direnv_hook {
         _direnv_hook
         # remove self from precmd
         precmd_functions=(${(@)precmd_functions:#_self_destruct_direnv_hook})
         builtin unfunction _self_destruct_direnv_hook
     }
-    precmd_functions=(_self_destruct_direnv_hook ${precmd_functions[@]})
+	typeset -ag precmd_functions;
+	if [[ -z "${precmd_functions[(r)_self_destruct_direnv_hook]+1}" ]]; then
+	  precmd_functions=( _self_destruct_direnv_hook ${precmd_functions[@]} )
+	fi
+	typeset -ag chpwd_functions;
+	if [[ -z "${chpwd_functions[(r)_direnv_hook]+1}" ]]; then
+	  chpwd_functions=( _direnv_hook ${chpwd_functions[@]} )
+	fi
 fi
 # }}}
 # Hacks {{{
