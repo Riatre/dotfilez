@@ -71,7 +71,7 @@ else
   zgen load "Riatre/pure" async.zsh "$PURE_COMMIT_SHA1"
   zgen load "Riatre/pure" pure.zsh "$PURE_COMMIT_SHA1"
   zgen load "Riatre/wezterm-shell-integration" assets/shell-integration/wezterm.sh 013fdc4d26cd8728678319ea6383e170e8bfe924
-  zgen load "zdharma-continuum/fast-syntax-highlighting" '' 13d7b4e63468307b6dcb2dadf6150818f242cbff
+  zgen load "z-shell/F-Sy-H" '' 899f68b52b6b86a36cd8178eb0e9782d4aeda714
 
   # Tools
   local ASDF_COMMIT_SHA1="0adc6c11fb4f87dbb476f8b61e4cf8fb7613599b"
