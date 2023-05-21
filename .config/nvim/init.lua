@@ -29,7 +29,7 @@ if not g.vscode then
   opt.wildignorecase = true
   opt.mouse = "a"
   
-  opt.undodir = "~/.undodir/"
+  opt.undodir = ".undodir/"
   opt.undofile = true
   opt.completeopt = "menu,preview,noinsert,longest,menuone"
   opt.fileencodings = "utf-8,gb18030,gbk"
@@ -119,6 +119,7 @@ if g.vscode then
   ]]
 else
   vim.cmd [[
+    set termguicolors
     colorscheme jellybeans
     noremap <C-\> :NERDTreeToggle<CR>
     noremap <F1> :MundoToggle<CR>
