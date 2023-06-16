@@ -4,13 +4,19 @@
 # PS4='+$EPOCHREALTIME %N:%i> '
 
 bindkey -e
-(( $+functions[add-zsh-hook] )) || autoload -Uz add-zsh-hook
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc. {{{
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+# }}}
 # Plugin Preferences {{{
 
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='underline'
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='none'
-export PURE_GIT_PULL=0
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
 export _Z_NO_PROMPT_COMMAND=yes
@@ -21,6 +27,7 @@ export PATH="$PATH:$HOME/.zgen/junegunn/fzf-$FZF_COMMIT_SHA1/bin"
 if (( ${+commands[zoxide]} )); then
     _USE_ZOXIDE=1
 fi
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # }}}
 # zgen Plugins {{{
@@ -67,9 +74,7 @@ else
   # Prompt
   # zgen load "zsh-users/zsh-autosuggestions" # laggy
   zgen load "zsh-users/zsh-history-substring-search" '' 400e58a87f72ecec14f783fbd29bc6be4ff1641c
-  local PURE_COMMIT_SHA1=f04e98a19cd9178ad1dd64c4f62351a06065bedb
-  zgen load "Riatre/pure" async.zsh "$PURE_COMMIT_SHA1"
-  zgen load "Riatre/pure" pure.zsh "$PURE_COMMIT_SHA1"
+  zgen load "romkatv/powerlevel10k" powerlevel10k 360dcd3907a7556a2ffa841380142e1f9dc6ec33
   zgen load "Riatre/wezterm-shell-integration" assets/shell-integration/wezterm.sh 013fdc4d26cd8728678319ea6383e170e8bfe924
   zgen load "z-shell/F-Sy-H" '' 899f68b52b6b86a36cd8178eb0e9782d4aeda714
 
@@ -321,6 +326,7 @@ man() {
   man "$@"
 }
 
+(( $+functions[add-zsh-hook] )) || autoload -Uz add-zsh-hook
 if [[ ! -v _USE_ZOXIDE ]]; then
     _z_chpwd_handler() {
       (_z --add "${PWD:a}" &)
@@ -331,6 +337,9 @@ fi
 
 # Dedup $PATH again, it's way easier than fixing all the scripts (nix.sh etc)
 typeset -aU path
+
+# Must be near the end.
+(( ! ${+functions[p10k]} )) || p10k finalize
 
 # }}}
 
