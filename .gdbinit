@@ -35,3 +35,4 @@ elif not os.getenv("GDB_BARE"):
     gdb.execute("ignore-errors source ~/lib/pwndbg/gdbinit.py")
 end
 
+set debuginfod enabled on
