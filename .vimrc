@@ -84,7 +84,6 @@ Plug 'will133/vim-dirdiff'
 
 " Languages (TODO: nvim migration)
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'scrooloose/syntastic', { 'on': [] }
 Plug 'honza/vim-snippets'
 
 call plug#end()
