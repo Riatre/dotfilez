@@ -34,7 +34,7 @@ fi
 # Load zgen only if a user types a zgen command
 zgen () {
     if [[ ! -s ${ZDOTDIR:-${HOME}}/.zgen/zgen.zsh ]]; then
-        ZGEN_COMMIT="76492ebc701fdcb7a48ae7c95a810cd6f55d5906"
+        ZGEN_COMMIT="86ccdd11435372f5700429eba75f63f6853433de"
         zgen_dir="${ZDOTDIR:-${HOME}}/.zgen"
         git init --initial-branch master "${zgen_dir}"
         git -C "${zgen_dir}" remote add origin https://github.com/tarjoilija/zgen.git
