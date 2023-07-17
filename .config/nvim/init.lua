@@ -3,9 +3,17 @@ g.mapleader = [[ ]]
 
 -- Options
 local opt = vim.opt
+opt.showmode = false
+opt.showcmd = true
+opt.number = true
+opt.relativenumber = true
+opt.cursorline = true
+opt.showmatch = true
+opt.lazyredraw = true
 opt.timeoutlen = 800
 opt.ttimeoutlen = 50
 opt.encoding = "utf-8"
+opt.background = "dark"
 opt.autoread = true
 opt.matchtime = 0
 opt.tabstop = 4
@@ -29,7 +37,7 @@ if not g.vscode then
   opt.wildignorecase = true
   opt.mouse = "a"
   
-  opt.undodir = ".undodir/"
+  opt.undodir = ".undodir/nvim/"
   opt.undofile = true
   opt.completeopt = "menu,preview,noinsert,longest,menuone"
   opt.fileencodings = "utf-8,gb18030,gbk"
