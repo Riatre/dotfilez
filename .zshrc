@@ -79,9 +79,9 @@ else
   zgen load "z-shell/F-Sy-H" '' 899f68b52b6b86a36cd8178eb0e9782d4aeda714
 
   # Tools
-  local ASDF_COMMIT_SHA1="0adc6c11fb4f87dbb476f8b61e4cf8fb7613599b"
-  zgen load "asdf-vm/asdf" asdf.sh $ASDF_COMMIT_SHA1
-  zgen load "asdf-vm/asdf" completions $ASDF_COMMIT_SHA1
+  # rtx
+  # optional bootstrap: cargo install rtx-cli
+  zgen load "Riatre/zim-rtx" '' 127cb24827ba52412e883c0f2571b481b281d0e2
 
   # Troubleshooting
   # zgen load "romkatv/zsh-prompt-benchmark"
@@ -311,6 +311,7 @@ if (( $+commands[direnv] )) && ! (( $+functions[_direnv_hook] )); then
 	  chpwd_functions=( _direnv_hook ${chpwd_functions[@]} )
 	fi
 fi
+
 # }}}
 # Hacks {{{
 

@@ -3,4 +3,5 @@
 .clangd
 .envrc
 *.zwc
+.tool-versions
 
