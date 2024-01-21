@@ -102,8 +102,8 @@ unset FZF_COMMIT_SHA1
 # History {{{
 
 HISTFILE=$HOME/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=50000
+SAVEHIST=50000
 
 # Show history
 case $HIST_STAMPS in
@@ -324,6 +324,7 @@ man() {
   LESS_TERMCAP_so=$'\E[38;5;246m' \
   LESS_TERMCAP_ue=$'\E[0m' \
   LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+  GROFF_NO_SGR=1 \
   man "$@"
 }
 
