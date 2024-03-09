@@ -4,4 +4,5 @@
 .envrc
 *.zwc
 .tool-versions
+compile_commands.json
 
