@@ -52,10 +52,11 @@
     dir                       # current directory
     vcs                       # git status
     context                   # user@host
+    virtualenv                # python virtual environment
+    nix_shell                 # nix shell flakes name
     command_execution_time    # previous command duration
     # =========================[ Line #2 ]=========================
     newline                   # \n
-    virtualenv                # python virtual environment
     status                    # exit code of the last command
     prompt_char               # prompt symbol
   )
@@ -96,10 +97,13 @@
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OVERWRITE_STATE=false
 
   # Grey Python Virtual Environment.
-  typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=$grey
+  typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=$cyan
   # Don't show Python version.
   typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
   typeset -g POWERLEVEL9K_VIRTUALENV_{LEFT,RIGHT}_DELIMITER=
+
+  # Cyan Nix shell flake name.
+  typeset -g POWERLEVEL9K_NIX_SHELL_FOREGROUND=$cyan
 
   # Blue current directory.
   typeset -g POWERLEVEL9K_DIR_FOREGROUND=$blue
