@@ -67,9 +67,9 @@ else
       zgen load "rupa/z" '' b82ac78a2d4457d2ca09973332638f123f065fd1
       zgen load "andrewferrier/fzf-z" '' 37c655b2b3f488b88281cda4538292ffab6fd1e7
   fi
-  zgen load "zsh-users/zsh-completions" '' 449cc702dc0363cd8fc37cc2d1fdb422f6d4d0e8
+  zgen load "zsh-users/zsh-completions" '' 2f951267cde726076988bc5706d737510a88e2fb
   zgen load "zsh-users/zaw" '' c8e6e2a4244491a2b89c2524a2030336be8d7c7f
-  zgen load "spwhitt/nix-zsh-completions" '' 6a1bfc024481bdba568f2ced65e02f3a359a7692
+  zgen load "spwhitt/nix-zsh-completions" '' 6e782b97091b07eb849b58953eb200ccc56ef833
 
   # Prompt
   # zgen load "zsh-users/zsh-autosuggestions" # laggy
