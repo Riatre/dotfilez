@@ -21,6 +21,26 @@ end
 local not_in_vscode = function()
     return vim.g.vscode == nil
 end
+local function setup_lualine()
+    require('lualine').setup {
+        options = {
+            theme = 'jellybeans',
+            globalstatus = true,
+        },
+        tabline = {
+            lualine_a = {{
+                'buffers',
+                component_separators = {},
+                section_separators = {},
+            }},
+            lualine_b = {},
+            lualine_c = {},
+            lualine_x = {},
+            lualine_y = {},
+            lualine_z = {'tabs'},
+        },
+    }
+end
 return require('packer').startup(function(use)
     use {'wbthomason/packer.nvim', commit = PACKER_COMMIT}
     use {'tpope/vim-sensible', commit = '624c7549a5dfccef2030acc545198d102e4be1c0'}
@@ -46,8 +66,7 @@ return require('packer').startup(function(use)
     use {'simnalamburt/vim-mundo', commit = 'b53d35fb5ca9923302b9ef29e618ab2db4cc675e', cond = not_in_vscode}
     use {'nanotech/jellybeans.vim', commit = 'ef83bf4dc8b3eacffc97bf5c96ab2581b415c9fa', cond = not_in_vscode}
     use {'t9md/vim-choosewin', commit = '839da609d9b811370216bdd9d4512ec2d0ac8644', cond = not_in_vscode}
-    use {'vim-airline/vim-airline', commit = 'cead8efb48fbd770757f74246fefd1a3c7bec8ef', cond = not_in_vscode}
-    use {'vim-airline/vim-airline-themes', commit = 'dd81554c2231e438f6d0e8056ea38fd0e80ac02a', cond = not_in_vscode}
+    use {'nvim-lualine/lualine.nvim', commit = '0a5a66803c7407767b799067986b4dc3036e1983', cond = not_in_vscode, config = setup_lualine}
     use {'qpkorr/vim-bufkill', commit = '2bd6d7e791668ea52bb26be2639406fcf617271f', cond = not_in_vscode}
     use {'majutsushi/tagbar', commit = 'be563539754b7af22bbe842ef217d4463f73468c', cond = not_in_vscode}
     use {'will133/vim-dirdiff', commit = '84bc8999fde4b3c2d8b228b560278ab30c7ea4c9', cond = not_in_vscode}
