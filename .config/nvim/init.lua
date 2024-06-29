@@ -37,7 +37,6 @@ if not g.vscode then
   opt.wildignorecase = true
   opt.mouse = "a"
   
-  opt.undodir = ".undodir/nvim/"
   opt.undofile = true
   opt.completeopt = "menu,preview,noinsert,longest,menuone"
   opt.fileencodings = "utf-8,gb18030,gbk"
