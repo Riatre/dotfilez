@@ -46,7 +46,4 @@ if vim.g.vscode then
   map('n', 'gc', '<Plug>VSCodeCommentary')
   map('o', 'gc', '<Plug>VSCodeCommentary')
   map('n', 'gcc', '<Plug>VSCodeCommentaryLine')
-  vim.cmd.source(cfg .. "keybindings_vscode.vim")
-else
-  vim.cmd.source(cfg .. "keybindings_gui.vim")
 end

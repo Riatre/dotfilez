@@ -43,6 +43,7 @@ if not g.vscode then
   opt.wildmode = "list:full"
   opt.wildignorecase = true
   opt.mouse = "a"
+  opt.clipboard = 'unnamedplus'
   
   opt.undofile = true
   opt.completeopt = "menu,preview,noinsert,longest,menuone"
