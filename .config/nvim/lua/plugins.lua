@@ -29,34 +29,53 @@ return {
 
   -- UI / Motion / IO plugins
 unpack(disable_in_vscode {
-  -- Editing with popups
-  'chrisbra/NrrwRgn',
-  'mg979/vim-visual-multi',
-  'simnalamburt/vim-mundo',
-  {
-    'nanotech/jellybeans.vim',
+  {'nanotech/jellybeans.vim',
     priority = 1000,
     config = function() vim.cmd.colorscheme("jellybeans") end,
   },
-  't9md/vim-choosewin',
   {'nvim-lualine/lualine.nvim', opts = {
     options = {
       theme = 'jellybeans',
       globalstatus = true,
     },
-    -- tabline = {
-    --   lualine_a = {{
-    --       'buffers',
-    --       component_separators = {},
-    --       section_separators = {},
-    --   }},
-    --   lualine_b = {},
-    --   lualine_c = {},
-    --   lualine_x = {},
-    --   lualine_y = {},
-    --   lualine_z = {'tabs'},
-    -- },
   }},
+  {'willothy/nvim-cokeline', -- {{{
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+    opts = {
+      show_if_buffers_are_at_least = 1,
+      default_hl = {
+        fg = function(buffer)
+          if buffer.is_modified then
+            return buffer.is_focused and '#ffffff' or '#ffb964'
+          else
+            return buffer.is_focused and '#d8dee9' or '#4f5b66'
+          end
+        end,
+        bg = function(buffer)
+          if buffer.is_modified then
+            return buffer.is_focused and '#437019' or '#151515'
+          else
+            return buffer.is_focused and '#0d61ac' or '#151515'
+          end
+        end,
+      },
+      components = {
+        { text = function (buffer) return ' ' .. buffer.index .. ': ' end },
+        { text = function (buffer) return buffer.unique_prefix end, italic = true, fg = '#4f5b66' },
+        { text = function (buffer)
+            return buffer.filename .. (buffer.is_modified and '+' or '') 
+          end },
+        { text = ' ' },
+      },
+    }, -- }}}
+  },
+  -- Editing with popups
+  'chrisbra/NrrwRgn',
+  'mg979/vim-visual-multi',
+  'simnalamburt/vim-mundo',
+  't9md/vim-choosewin',
   'qpkorr/vim-bufkill',
   'majutsushi/tagbar',
   'will133/vim-dirdiff',
