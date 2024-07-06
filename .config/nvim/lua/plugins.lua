@@ -71,8 +71,6 @@ unpack(disable_in_vscode {
       },
     }, -- }}}
   },
-  -- Editing with popups
-  'chrisbra/NrrwRgn',
   'mg979/vim-visual-multi',
   'simnalamburt/vim-mundo',
   't9md/vim-choosewin',

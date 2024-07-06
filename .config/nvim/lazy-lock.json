@@ -1,5 +1,4 @@
 {
-  "NrrwRgn": { "branch": "master", "commit": "e027db9d94f94947153cd7b5ac9abd04371ab2b0" },
   "jellybeans.vim": { "branch": "master", "commit": "ef83bf4dc8b3eacffc97bf5c96ab2581b415c9fa" },
   "lazy.nvim": { "branch": "main", "commit": "d901d2166fef0304e360316e7a04316f11ab62d0" },
   "leap.nvim": { "branch": "main", "commit": "24c0f4d08b8081022e2675fbedb59e8de325f9a6" },
