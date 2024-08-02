@@ -254,6 +254,7 @@ alias emx='emacsclient -t'
 alias factorz='python -m primefac'
 alias bazel='bazelisk'
 alias vol='python ~/lib/volatility/vol.py'
+alias nv='nvim'
 
 if (( $+commands[aws] )) && [[ -f "$HOME/.config/cloudflare-account-id" ]]; then
     alias r2="aws --profile=cf --endpoint-url https://$(<$HOME/.config/cloudflare-account-id).r2.cloudflarestorage.com s3"
