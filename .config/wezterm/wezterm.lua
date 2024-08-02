@@ -64,10 +64,10 @@ config = {
     hide_tab_bar_if_only_one_tab = true,
     exit_behavior = "Close",
     font = wezterm.font_with_fallback({
-        "Iosevka",
+        "Iosevka Term",
         "Noto Sans Mono CJK SC",
     }),
-    font_size = 12.0,
+    font_size = 14.0,
     launch_menu = launch_menu,
     scrollback_lines = 50000,
     initial_cols = 240,
@@ -76,7 +76,7 @@ config = {
         {
             event={Up={streak=1, button="Right"}},
             mods="NONE",
-            action="Paste",
+            action=wezterm.action.PasteFrom "Clipboard",
         },
     },
     canonicalize_pasted_newlines = "None",
