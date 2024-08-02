@@ -37,7 +37,7 @@ install () {
     IFS=$'\n'
     for PKG in $PACKAGES
     do
-        if ! $SUDO "python$NEW" -m pip install "$@" "$PKG"; then
+        if ! $SUDO "python$NEW" -m pip install --br "$@" "$PKG"; then
             FAILED+=( "$PKG" )
         fi
     done
@@ -47,6 +47,6 @@ install () {
     fi
 }
 
-install "$OLD_PACKAGES" sudo
+# install "$OLD_PACKAGES" sudo
 install "$OLD_USER_PACKAGES" "" --user
 
