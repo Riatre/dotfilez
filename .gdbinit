@@ -2,7 +2,6 @@ set history save on
 set history size 10000
 set history filename ~/.gdbhist
 
-set disassembly-flavor intel
 add-auto-load-safe-path /usr/share/go-1.*/src/runtime/runtime-gdb.py
 add-auto-load-safe-path /home/riatre/.rustup/toolchains/*-x86_64-unknown-linux-gnu/lib/rustlib/etc/
 
@@ -26,6 +25,9 @@ This is primarily useful in scripts.'''
 
 IgnoreErrorsCommand ()
 end
+
+# Ignore errors during set disassembly-flavor as it is bogus on aarch64.
+ignore-errors set disassembly-flavor intel
 
 python
 import os

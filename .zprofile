@@ -73,6 +73,7 @@ fi
 
 # Nix
 path_to_probe=(
+    /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
     $HOME/.nix-profile/etc/profile.d/nix.sh
     /etc/profile.d/debuginfod.sh
 )
