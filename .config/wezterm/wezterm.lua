@@ -43,6 +43,7 @@ local dim_by_fifteen_percent = {
 }
 
 local launch_menu = {}
+local keys = {}
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
     table.insert(launch_menu, {
@@ -55,19 +56,31 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
     })
 end
 
+if wezterm.target_triple == "aarch64-apple-darwin" then
+  keys = {
+    {
+      key = ',',
+      mods = 'SUPER',
+      action = wezterm.action.SpawnCommandInNewTab {
+        cwd = wezterm.home_dir,
+        args = { '/opt/homebrew/bin/nvim', wezterm.config_file },
+      },
+    },
+  }
+end
+
 config = {
     color_scheme = "Jellybeans",
     -- color_scheme = "Tomorrow Night Bright",
     -- foreground_text_hsb = dim_by_fifteen_percent, -- For use with Tomorrow Night Bright
     color_schemes = {["Jellybeans"] = Jellybeans},
-    -- enable_tab_bar = false,
     hide_tab_bar_if_only_one_tab = true,
     exit_behavior = "Close",
     font = wezterm.font_with_fallback({
         "Iosevka Term",
         "Noto Sans Mono CJK SC",
     }),
-    font_size = 14.0,
+    font_size = 12.0,
     launch_menu = launch_menu,
     scrollback_lines = 50000,
     initial_cols = 240,
@@ -88,7 +101,18 @@ config = {
         bottom = 0,
     },
     front_end = "WebGpu",
-    -- window_decorations = "NONE",
+    keys = keys,
 }
+
+if wezterm.target_triple == "aarch64-apple-darwin" then
+    -- config.window_background_opacity = 0.9
+    -- config.macos_window_background_blur = 30
+    config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+    config.hide_tab_bar_if_only_one_tab = false
+end
+
+if wezterm.hostname() == "ookipad.local" then
+    config.font_size = 15.0
+end
 
 return config
