@@ -102,6 +102,9 @@ config = {
     },
     front_end = "WebGpu",
     keys = keys,
+    selection_word_boundary = " \t\n{}[]()\"'`│",
+    ssh_domains = wezterm.default_ssh_domains(),
+    window_decorations = "RESIZE",
 }
 
 if wezterm.target_triple == "aarch64-apple-darwin" then
