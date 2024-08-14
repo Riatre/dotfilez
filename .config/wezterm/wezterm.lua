@@ -74,7 +74,6 @@ config = {
     -- color_scheme = "Tomorrow Night Bright",
     -- foreground_text_hsb = dim_by_fifteen_percent, -- For use with Tomorrow Night Bright
     color_schemes = {["Jellybeans"] = Jellybeans},
-    hide_tab_bar_if_only_one_tab = true,
     exit_behavior = "Close",
     font = wezterm.font_with_fallback({
         "Iosevka Term",
@@ -104,18 +103,13 @@ config = {
     keys = keys,
     selection_word_boundary = " \t\n{}[]()\"'`│",
     ssh_domains = wezterm.default_ssh_domains(),
-    window_decorations = "RESIZE",
+    window_decorations = "INTEGRATED_BUTTONS|RESIZE",
+    max_fps = 120,
 }
-
-if wezterm.target_triple == "aarch64-apple-darwin" then
-    -- config.window_background_opacity = 0.9
-    -- config.macos_window_background_blur = 30
-    config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
-    config.hide_tab_bar_if_only_one_tab = false
-end
 
 if wezterm.hostname() == "ookipad.local" then
     config.font_size = 15.0
+    config.max_fps = 60,
 end
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
@@ -124,6 +118,11 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
             identityagent = 'C:\\Users\\Riatre\\.ssh\\af_unix_auth_sock',
         }
     end
+    config.window_frame =  {
+        font = wezterm.font "Noto Mono",
+        
+    }
+    config.window_padding.top = 3
 end
 
 return config
