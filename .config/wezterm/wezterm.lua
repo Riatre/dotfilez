@@ -115,4 +115,12 @@ if wezterm.hostname() == "ookipad.local" then
     config.font_size = 15.0
 end
 
+if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+    for _, domain in ipairs(config.ssh_domains) do
+        domain.ssh_option = {
+            identityagent = 'C:\\Users\\Riatre\\.ssh\\af_unix_auth_sock',
+        }
+    end
+end
+
 return config
