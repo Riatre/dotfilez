@@ -85,6 +85,7 @@ path_to_probe=(
     /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
     $HOME/.nix-profile/etc/profile.d/nix.sh
     /etc/profile.d/debuginfod.sh
+    $HOME/.orbstack/shell/init.zsh
 )
 for fn in $path_to_probe; do
     if [[ -e "$fn" ]]; then
@@ -94,3 +95,7 @@ done
 unset fn
 unset path_to_probe
 
+# FUCK OFF YOU STUPID DO NOT REPEATEDLY DUMP SHIT INTO MY SHELL RC
+# Added by OrbStack: command-line tools and integration
+# Comment this line if you don't want it to be added again.
+# source ~/.orbstack/shell/init.zsh 2>/dev/null || :
