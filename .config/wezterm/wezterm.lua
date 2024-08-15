@@ -42,6 +42,20 @@ local dim_by_fifteen_percent = {
     brightness = 0.85,
 }
 
+function update_overrides_if_changed(window, new_config)
+    local overrides = window:get_config_overrides() or {}
+    local diff = false
+    for k, v in pairs(new_config) do
+        if overrides[k] ~= v then
+            diff = true
+            overrides[k] = v
+        end
+    end
+    if diff then
+        window:set_config_overrides(overrides)
+    end
+end
+
 local launch_menu = {}
 local keys = {}
 
@@ -124,5 +138,29 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
     }
     config.window_padding.top = 3
 end
+
+-- Hide window decoration when full screen and only one tab.
+wezterm.on("window-resized", function(window, pane)
+    local new_config
+    if window:get_dimensions().is_full_screen then
+        new_config = {
+            window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
+            hide_tab_bar_if_only_one_tab = true,
+            window_decorations = "RESIZE",
+            use_fancy_tab_bar = false,
+        }
+    else
+        new_config = {
+            window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
+            hide_tab_bar_if_only_one_tab = false,
+            window_decorations = "INTEGRATED_BUTTONS|RESIZE",
+            use_fancy_tab_bar = true,
+        }
+        if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+            new_config.window_padding.top = 3
+        end
+    end
+    update_overrides_if_changed(window, new_config)
+end)
 
 return config
