@@ -119,11 +119,13 @@ config = {
     ssh_domains = wezterm.default_ssh_domains(),
     window_decorations = "INTEGRATED_BUTTONS|RESIZE",
     max_fps = 120,
+    command_palette_font_size = 16,
+    command_palette_rows = 15,
 }
 
 if wezterm.hostname() == "ookipad.local" then
     config.font_size = 15.0
-    config.max_fps = 60,
+    config.max_fps = 60
 end
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
