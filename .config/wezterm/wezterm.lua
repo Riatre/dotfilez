@@ -56,41 +56,27 @@ function update_overrides_if_changed(window, new_config)
     end
 end
 
-local launch_menu = {}
 local keys = {}
 
-if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-    table.insert(launch_menu, {
-        label = "Powershell",
-        args = {"powershell.exe", "-NoLogo"},
-    })
-    table.insert(launch_menu, {
-        label = "WSL (Default)",
-        args = {"wsl.exe"},
-    })
-end
-
 if wezterm.target_triple == "aarch64-apple-darwin" then
-  keys = {
-    {
-      key = ',',
-      mods = 'SUPER',
-      action = wezterm.action.SpawnCommandInNewTab {
-        cwd = wezterm.home_dir,
-        args = { '/opt/homebrew/bin/nvim', wezterm.config_file },
-      },
-    },
-    {
-      key = 'p',
-      mods = 'CTRL|SHIFT',
-      action = wezterm.action.DisableDefaultAssignment,
-    },
-    {
-      key = 'p',
-      mods = 'SUPER|SHIFT',
-      action = wezterm.action.ActivateCommandPalette,
-    },
-  }
+    table.insert(keys, {
+        key = ',',
+        mods = 'SUPER',
+        action = wezterm.action.SpawnCommandInNewTab {
+          cwd = wezterm.home_dir,
+          args = { '/opt/homebrew/bin/nvim', wezterm.config_file },
+        },
+    })
+    table.insert(keys, {
+        key = 'p',
+        mods = 'CTRL|SHIFT',
+        action = wezterm.action.DisableDefaultAssignment,
+    })
+    table.insert(keys, {
+        key = 'p',
+        mods = 'SUPER|SHIFT',
+        action = wezterm.action.ActivateCommandPalette,
+    })
 end
 
 config = {
@@ -104,7 +90,7 @@ config = {
         "Noto Sans Mono CJK SC",
     }),
     font_size = 12.0,
-    launch_menu = launch_menu,
+    launch_menu = {},
     scrollback_lines = 50000,
     initial_cols = 240,
     initial_rows = 72,
@@ -113,6 +99,31 @@ config = {
             event={Up={streak=1, button="Right"}},
             mods="NONE",
             action=wezterm.action.PasteFrom "Clipboard",
+        },
+        {
+            event={Up={streak=1, button="Left"}},
+            mods="NONE",
+            action=wezterm.action.CompleteSelection 'ClipboardAndPrimarySelection',
+        },
+        {
+            event={Up={streak=1, button="Left"}},
+            mods="SHIFT",
+            action=wezterm.action.CompleteSelection 'ClipboardAndPrimarySelection',
+        },
+        {
+            event={Up={streak=1, button="Left"}},
+            mods="SHIFT|ALT",
+            action=wezterm.action.CompleteSelection 'ClipboardAndPrimarySelection',
+        },
+        {
+            event={Up={streak=1, button="Left"}},
+            mods="CTRL",
+            action=wezterm.action.OpenLinkAtMouseCursor,
+        },
+        {
+            event={Up={streak=1, button="Left"}},
+            mods="SUPER",
+            action=wezterm.action.OpenLinkAtMouseCursor,
         },
     },
     canonicalize_pasted_newlines = "None",
@@ -139,6 +150,15 @@ if wezterm.hostname() == "ookipad.local" then
 end
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+    table.insert(config.launch_menu, {
+        label = "Powershell",
+        args = {"powershell.exe", "-NoLogo"},
+    })
+    table.insert(config.launch_menu, {
+        label = "WSL (Default)",
+        args = {"wsl.exe"},
+    })
+
     for _, domain in ipairs(config.ssh_domains) do
         domain.ssh_option = {
             identityagent = 'C:\\Users\\Riatre\\.ssh\\af_unix_auth_sock',
