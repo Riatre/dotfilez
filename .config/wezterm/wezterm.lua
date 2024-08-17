@@ -80,6 +80,16 @@ if wezterm.target_triple == "aarch64-apple-darwin" then
         args = { '/opt/homebrew/bin/nvim', wezterm.config_file },
       },
     },
+    {
+      key = 'p',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.DisableDefaultAssignment,
+    },
+    {
+      key = 'p',
+      mods = 'SUPER|SHIFT',
+      action = wezterm.action.ActivateCommandPalette,
+    },
   }
 end
 
