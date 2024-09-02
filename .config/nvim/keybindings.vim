@@ -20,10 +20,10 @@ vnoremap > >gv
 " reselect last paste
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
-if exists('g:vscode')
-    noremap <C-S> :Write<CR>
-    nnoremap <Leader>w :Write<CR>
+noremap <C-S> :w<CR>
+nnoremap <Leader>w :w<CR>
 
+if exists('g:vscode')
     nnoremap <Leader>v :Vsplit<CR>
     nnoremap <Leader>s :Split<CR>
     nnoremap <Leader>q <Cmd>call VSCodeNotify('workbench.action.closeActiveEditor')<CR>
@@ -32,8 +32,6 @@ else
     noremap <F8> :TagbarToggle<CR>
     nmap - <Plug>(choosewin)
 
-    noremap <C-S> :w<CR>
-    nnoremap <Leader>w :w<CR>
     nnoremap <Leader>o :e 
     nnoremap <Leader>n :ene<CR>
     nnoremap <Leader>v :vsplit<CR>
