@@ -38,9 +38,6 @@ else
     nnoremap <Leader>s :split<CR>
     nnoremap <Leader>lvsa :vert sba<CR>
 
-    " For smooth transition
-    inoremap <C-BS> <C-w>
-
     set pastetoggle=<F11>
 
     " find current word in quickfix
@@ -57,11 +54,6 @@ else
 
     " window killer
     nnoremap <silent> Q :lua CloseWindowOrKillBuffer()<cr>
-
-    inoremap <A-h> <Left>
-    inoremap <A-j> <Down>
-    inoremap <A-k> <Up>
-    inoremap <A-l> <Right>
 
     map <C-J> :bnext<CR>
     map <C-K> :bprev<CR>
