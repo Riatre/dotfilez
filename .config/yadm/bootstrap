@@ -1,4 +1,6 @@
-#!/bin/bash -e
+#!/usr/bin/env bash
+
+set -e
 
 if command -v zsh >/dev/null 2>&1; then
     echo "Bootstraping zsh"
