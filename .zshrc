@@ -247,6 +247,19 @@ bindkey '^[[1;3A' z4h-cd-up
 bindkey '^[[1;3B' fzf-cd-widget
 # bindkey '^R' sane-fzf-history-widget
 
+# zsh-edit: Make ^W etc work on subword again. It's fine to add bindings
+# working on shell word, but it's too annoying to change the default.
+bindkey -M emacs '^W' backward-kill-subword        # Ctrl-W
+bindkey -M emacs '^[d' kill-subword                # Alt-D
+bindkey -M emacs '^[^W' backward-kill-shell-word   # Ctrl-Alt-W
+bindkey -M emacs '^[^D' kill-shell-word            # Ctrl-Alt-D
+bindkey -M emacs '^[b' backward-subword            # Alt-B
+bindkey -M emacs '^[f' forward-subword             # Alt-F
+bindkey -M emacs '^[^B' backward-shell-word        # Ctrl-Alt-B
+bindkey -M emacs '^[^F' forward-shell-word         # Ctrl-Alt-F
+# Restore Ctrl-H
+bindkey -M emacs '^H' backward-delete-char
+
 alias ipy='ipython3'
 alias bpy='bpython'
 alias rtr='ssh h.drone.riat.re'
