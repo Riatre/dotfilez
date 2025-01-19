@@ -82,7 +82,7 @@ else
   # Tools
   # rtx
   # optional bootstrap: cargo install rtx-cli
-  zgen load "Riatre/zim-mise" '' ff6fe7d48908d553c8685beb713d58705c009800
+  zgen load "Riatre/zim-mise" '' f331d53093cfcc034a0ba7826d3f6a28e5f6d9b5
 
   # Troubleshooting
   # zgen load "romkatv/zsh-prompt-benchmark"
