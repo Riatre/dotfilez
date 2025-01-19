@@ -67,7 +67,7 @@ else
       zgen load "rupa/z" '' b82ac78a2d4457d2ca09973332638f123f065fd1
       zgen load "andrewferrier/fzf-z" '' 37c655b2b3f488b88281cda4538292ffab6fd1e7
   fi
-  zgen load "zsh-users/zsh-completions" '' 2f951267cde726076988bc5706d737510a88e2fb
+  zgen load "zsh-users/zsh-completions" '' a7f01622f7bc6941d1c6297be6995fe1bbc9d4de
   zgen load "zsh-users/zaw" '' c8e6e2a4244491a2b89c2524a2030336be8d7c7f
   zgen load "spwhitt/nix-zsh-completions" '' 6e782b97091b07eb849b58953eb200ccc56ef833
   zgen load "marlonrichert/zsh-edit" '' cccdac9d831b807d0c55c509965de14dc0308d47
