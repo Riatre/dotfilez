@@ -28,6 +28,7 @@ end
 
 # Ignore errors during set disassembly-flavor as it is bogus on aarch64.
 ignore-errors set disassembly-flavor intel
+ignore-errors source ~/src/github.com/xf1les/muslheap/muslheap.py
 
 python
 import os
