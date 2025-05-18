@@ -14,8 +14,6 @@ function disable_in_vscode(spec)
 end
 -- }}}
 return {
-  'tpope/vim-sensible',
-
   -- Text editing behaviour (should be enabled anywhere)
   -- VSCode has builtin comment switch (and it does this better)
   {'tomtom/tcomment_vim', cond = not vscode},
@@ -36,7 +34,7 @@ unpack(disable_in_vscode {
   {'nvim-lualine/lualine.nvim', opts = {
     options = {
       theme = 'jellybeans',
-      globalstatus = true,
+      globalstatus = false,
     },
   }},
   {'willothy/nvim-cokeline', -- {{{

@@ -33,7 +33,7 @@ opt.incsearch = true
 opt.hlsearch = true
 opt.scrolloff = 4
 opt.hidden = true
-opt.autochdir = true
+opt.autochdir = false
 opt.ignorecase = true
 opt.smartcase = true
 if not g.vscode then
