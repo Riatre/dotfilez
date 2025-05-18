@@ -1,0 +1,70 @@
+#!/bin/bash -eu
+set -o pipefail
+
+# Function to print error messages to stderr and exit
+error_exit() {
+  echo "Error: $1" >&2
+  exit 1
+}
+
+if ! command -v eu-unstrip &> /dev/null; then
+  cat >&2 <<EOF
+Error: Required command 'eu-unstrip' not found.
+Please install it (e.g., part of the 'elfutils' package) and ensure it's in your PATH.
+EOF
+  exit 1
+fi
+
+if ! command -v debuginfod-find &> /dev/null; then
+  cat >&2 <<EOF
+Error: Required command 'debuginfod-find' not found.
+Please install it (e.g., part of 'debuginfod' or 'elfutils-debuginfod') and ensure it's in your PATH.
+EOF
+  exit 1
+fi
+
+if [ "$#" -lt 1 ]; then
+  echo "Usage: $(basename "$0") <stripped-file> [<stripped-file> ...]" >&2
+  exit 1
+fi
+
+process_file() {
+  local stripped_file_arg="$1"
+  local stripped_file
+
+  if [ ! -f "$stripped_file_arg" ]; then
+    error_exit "File '$stripped_file_arg' not found or is not a regular file."
+  fi
+
+  # Resolve to an absolute path to avoid potential issues with relative paths
+  if ! stripped_file="$(realpath "$stripped_file_arg")"; then
+    error_exit "Could not determine the absolute path for '$stripped_file_arg'."
+  fi
+
+  # Use set +e to prevent script from exiting if debuginfod-find fails
+  set +e
+  local debuginfo_file_path
+  debuginfo_file_path="$(debuginfod-find debuginfo "$stripped_file")"
+  local find_status=$?
+  set -e
+
+  if [ $find_status -ne 0 ] || [ -z "$debuginfo_file_path" ]; then
+    cat >&2 <<EOF
+Error: debuginfod-find could not find debuginfo for '$stripped_file'.
+Configured debuginfod servers: $DEBUGINFOD_URLS
+EOF
+    return 1
+  fi
+
+  eu-unstrip "$stripped_file" "$debuginfo_file_path" -o "$stripped_file"
+}
+
+# Process all files provided as arguments
+exit_code=0
+for file in "$@"; do
+  if ! process_file "$file"; then
+    exit_code=1
+  fi
+done
+
+exit $exit_code
