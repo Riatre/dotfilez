@@ -38,8 +38,6 @@ else
     nnoremap <Leader>s :split<CR>
     nnoremap <Leader>lvsa :vert sba<CR>
 
-    set pastetoggle=<F11>
-
     " find current word in quickfix
     nnoremap <leader>fw :execute "vimgrep ".expand("<cword>")." %"<cr>:copen<cr>
     " find last search in quickfix
