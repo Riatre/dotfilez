@@ -5,6 +5,11 @@
 
 bindkey -e
 
+# VSCode hack that must stay at top /sigh {{{
+if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+  ITERM_SHELL_INTEGRATION_INSTALLED="Yes"
+fi
+# }}}
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc. {{{
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
