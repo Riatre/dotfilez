@@ -80,7 +80,7 @@ else
   # Prompt
   # zgen load "zsh-users/zsh-autosuggestions" # laggy
   zgen load "zsh-users/zsh-history-substring-search" '' 400e58a87f72ecec14f783fbd29bc6be4ff1641c
-  zgen load "romkatv/powerlevel10k" powerlevel10k 360dcd3907a7556a2ffa841380142e1f9dc6ec33
+  zgen load "romkatv/powerlevel10k" powerlevel10k 36f3045d69d1ba402db09d09eb12b42eebe0fa3b
   zgen load "Riatre/wezterm-shell-integration" assets/shell-integration/wezterm.sh 013fdc4d26cd8728678319ea6383e170e8bfe924
   zgen load "z-shell/F-Sy-H" '' 899f68b52b6b86a36cd8178eb0e9782d4aeda714
 
