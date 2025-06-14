@@ -24,6 +24,7 @@ HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='underline'
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='none'
 # export ZSH_AUTOSUGGEST_USE_ASYNC=1
 # export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=30
+WEZTERM_SHELL_SKIP_SEMANTIC_ZONES=1
 export _Z_NO_PROMPT_COMMAND=yes
 # fzf 0.38.0
 local FZF_COMMIT_SHA1="352ea072269dfe2a3c429785a95a2f22887ccda3"
@@ -150,10 +151,10 @@ function z4h-down-local-history() {
   -z4h-with-local-history 1 history-substring-search-down "$@"
 }
 function z4h-up-global-history() {
-  -z4h-with-local-history 0 history-substring-search-up "$@"
+  -z4h-with-local-history 0 zle .up-line-or-history "$@"
 }
 function z4h-down-global-history() {
-  -z4h-with-local-history 0 history-substring-search-down "$@"
+  -z4h-with-local-history 0 zle .down-line-or-history "$@"
 }
 zle -N z4h-up-local-history
 zle -N z4h-down-local-history
