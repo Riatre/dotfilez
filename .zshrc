@@ -14,7 +14,9 @@ fi
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+  if [[ -z "${CLAUDECODE}" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+  fi
 fi
 # }}}
 # Plugin Preferences {{{
@@ -52,7 +54,9 @@ zgen () {
 }
 
 if [[ -s ${ZDOTDIR:-${HOME}}/.zgen/init.zsh ]]; then
-  source ${ZDOTDIR:-${HOME}}/.zgen/init.zsh
+  if [[ -z "${CLAUDECODE}" ]]; then
+    source ${ZDOTDIR:-${HOME}}/.zgen/init.zsh
+  fi
 else
   # Prezto do compinit for us.
   export ZGEN_AUTOLOAD_COMPINIT=0
@@ -332,7 +336,7 @@ fi
 # }}}
 # Hacks {{{
 
-unalias man
+unalias man 2>/dev/null || true
 man() {
   env LESS_TERMCAP_mb=$'\E[01;31m' \
   LESS_TERMCAP_md=$'\E[01;38;5;74m' \
