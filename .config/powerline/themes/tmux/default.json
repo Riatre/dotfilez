@@ -18,12 +18,6 @@
         "left": [],
 		"right": [
 			{
-				"function": "powerline.segments.common.net.external_ip",
-                "args": {
-                    "query_url": "http://ifconfig.me/"
-                }
-			},
-			{
 				"function": "powerline.segments.common.sys.system_load"
 			},
 			{
