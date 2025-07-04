@@ -25,3 +25,5 @@
 	defaultBranch = master
 [safe]
 	bareRepository = explicit
+[advice]
+	detachedHead = false
