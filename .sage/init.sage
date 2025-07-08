@@ -1,1 +1,1 @@
-%colors Linux
+%colors linux
