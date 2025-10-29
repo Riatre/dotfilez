@@ -77,6 +77,15 @@ if wezterm.target_triple == "aarch64-apple-darwin" then
         mods = 'SUPER|SHIFT',
         action = wezterm.action.ActivateCommandPalette,
     })
+    table.insert(keys, {
+      key = 'phys:Help',
+      action = wezterm.action.SendKey { key="Insert" },
+    })
+    table.insert(keys, {
+        key = 'phys:Help',
+        mods = 'SHIFT',
+        action = wezterm.action.PasteFrom 'Clipboard',
+    })
 end
 
 config = {
@@ -144,7 +153,7 @@ config = {
     command_palette_rows = 15,
 }
 
-if wezterm.hostname() == "ookipad.local" then
+if wezterm.hostname() == "ookipad.local" or wezterm.hostname() == "mookipad.local" then
     config.font_size = 15.0
     config.max_fps = 60
 end
