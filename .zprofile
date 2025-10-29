@@ -63,6 +63,10 @@ if [[ -d "/opt/homebrew" ]]; then
     export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 fi
 
+if [[ -d "$HOME/.gyro/bin" ]]; then
+    path=($HOME/.gyro/bin $path)
+fi
+
 #
 # Less
 #

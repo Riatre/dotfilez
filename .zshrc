@@ -272,7 +272,7 @@ bindkey -M emacs '^H' backward-delete-char
 
 alias ipy='ipython3'
 alias bpy='bpython'
-alias rtr='ssh h.drone.riat.re'
+alias rtr='ssh riatre@h.drone.riat.re'
 alias emxc='emacsclient -nc'
 alias emx='emacsclient -t'
 alias factorz='python -m primefac'
