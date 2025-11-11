@@ -5,4 +5,4 @@
 *.zwc
 .tool-versions
 compile_commands.json
-
+.claude/settings.local.json
