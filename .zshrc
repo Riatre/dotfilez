@@ -296,6 +296,29 @@ fi
 
 function mkcd() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 
+function clcd() {
+  local url="$1"
+  [[ -z "$url" ]] && { echo "Usage: clcd <url>" >&2; return 1; }
+
+  # Remove .git suffix if present
+  url="${url%.git}"
+
+  # Parse URL: extract schema, host, path
+  # Format: schema://host/namespace/name
+  local path_part="${url#*://}"  # Remove schema://
+  local host="${path_part%%/*}"  # Extract host
+  local repo_path="${path_part#*/}"  # Remove host/
+
+  local target_dir="$HOME/src/${host}/${repo_path}"
+
+  if [[ -d "$target_dir" ]]; then
+    cd "$target_dir"
+  else
+    mkdir -p "$target_dir"
+    git clone "$url.git" "$target_dir" && cd "$target_dir"
+  fi
+}
+
 # fd-find in Debian is named /usr/bin/fdfind
 if (( $+commands[fdfind] && ! ($+commands[fd]) )); then
     alias fd=fdfind
