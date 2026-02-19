@@ -153,7 +153,7 @@ config = {
     command_palette_rows = 15,
 }
 
-if wezterm.hostname() == "ookipad.local" or wezterm.hostname() == "mookipad.local" then
+if string.sub(wezterm.hostname(), 1, 7) == "ookipad" or string.sub(wezterm.hostname(), 1, 8) == "mookipad" then
     config.font_size = 15.0
     config.max_fps = 60
 end

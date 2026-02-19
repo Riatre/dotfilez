@@ -55,6 +55,17 @@ if not g.vscode then
     pattern = { 'cpp', 'c', 'lua', 'yaml' },
   })
 end
+if g.neovide then
+  opt.guifont = "Iosevka,Sarasa Mono SC:h15"
+  opt.linespace = -1
+  g.neovide_floating_blur_amount_x = 2.0
+  g.neovide_floating_blur_amount_y = 2.0
+  g.neovide_input_macos_option_key_is_meta = 'both'
+  g.neovide_cursor_animation_length = 0.04
+  g.neovide_cursor_trail_size = 0.0
+  g.neovide_cursor_short_animation_length = 0.04
+  g.neovide_cursor_smooth_blink = true
+end
 
 require("bootstrap").ensure_lazy()
 require("lazy").setup("plugins")
