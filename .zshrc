@@ -63,7 +63,7 @@ else
   zgen load "willghatch/zsh-saneopt" saneopt.plugin.zsh 8ec7ce0387309dcdb72b71ac85edc8799aa42792
 
   export ZGEN_PREZTO_REPO=Riatre/prezto
-  export ZGEN_PREZTO_BRANCH=9156b35ee4886b3e9ef35e821da58ab723139432
+  export ZGEN_PREZTO_BRANCH=f9cfcfb464f2d545ab1b5de7ff6df95589103def
   export ZGEN_PREZTO_LOAD_DEFAULT=0
   zgen prezto '*:*' color 'yes'
   zgen prezto
