@@ -51,7 +51,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible', { 'commit': '624c7549a5dfccef2030acc545198d102e4be1c0' }
 
 " UI
-Plug 'tmux-plugins/vim-tmux', { 'commit': 'cfe76281efc29890548cf9eedd42ad51c7a1faf0' }
 Plug 'vim-airline/vim-airline', { 'commit': 'cead8efb48fbd770757f74246fefd1a3c7bec8ef' }
 Plug 'vim-airline/vim-airline-themes', { 'commit': 'dd81554c2231e438f6d0e8056ea38fd0e80ac02a' }
 Plug 'nanotech/jellybeans.vim', { 'commit': 'ef83bf4dc8b3eacffc97bf5c96ab2581b415c9fa' }
