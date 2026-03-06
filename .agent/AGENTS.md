@@ -1,6 +1,7 @@
 ## User Preferences
 
 - Write descriptive commit messages, in Linux kernel style, follow 50/72 rule. Peek a few commits to mimic their title style. In general, do not prefix the title with subsystem name or conventional commits prefix, unless existing commits have them.
+- When building git commit commands, never put a literal `\n` inside an argv string and expect the shell to turn it into a newline. Use an actual newline in the quoted text, repeated flags, or a file/stdin input path.
 - Prioritize writing simple, concise, obviously correct code unless the inherent complexity prevents this approach.
 - Use comments sparsely, and only for *why* code works a certain way when it's not obvious. Avoid comments that simply describe *what* the code does.
 - If the task is unreasonable, infeasible or surprisingly complicated, communicate this to the user clearly and discuss with them before doing anything.
