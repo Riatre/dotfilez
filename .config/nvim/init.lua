@@ -70,3 +70,4 @@ end
 require("bootstrap").ensure_lazy()
 require("lazy").setup("plugins")
 require("keybindings")
+require("lsp")

@@ -83,4 +83,5 @@ unpack(disable_in_vscode {
   {'nvim-telescope/telescope-fzf-native.nvim', 
     build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' },
   {'mason-org/mason.nvim', opts = {}},
+  'neovim/nvim-lspconfig',
 })}
