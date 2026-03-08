@@ -7,3 +7,4 @@
 compile_commands.json
 .claude/settings.local.json
 .cache
+__pycache__
