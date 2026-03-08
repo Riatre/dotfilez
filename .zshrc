@@ -280,6 +280,7 @@ alias bazel='bazelisk'
 alias vol='python ~/lib/volatility/vol.py'
 alias nv='nvim'
 alias k='kubectl'
+alias gef='GDB_GEF=1 gdb'
 
 if (( $+commands[aws] )) && [[ -f "$HOME/.config/cloudflare-account-id" ]]; then
     alias r2="aws --profile=cf --endpoint-url https://$(<$HOME/.config/cloudflare-account-id).r2.cloudflarestorage.com s3"

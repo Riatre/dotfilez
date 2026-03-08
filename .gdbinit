@@ -31,9 +31,9 @@ ignore-errors set disassembly-flavor intel
 ignore-errors source ~/src/github.com/xf1les/muslheap/muslheap.py
 
 python
-import os
+import os, sys
 if os.getenv("GDB_GEF"):
-    gdb.execute("ignore-errors source ~/lib/gef/gef.py")
+    sys.path.insert(0, "/home/riatre/lib/gef"); from gef import *; Gef.main()
 elif not os.getenv("GDB_BARE"):
     gdb.execute("ignore-errors source ~/lib/pwndbg/gdbinit.py")
 end
