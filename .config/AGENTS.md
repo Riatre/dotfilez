@@ -8,6 +8,9 @@
 - Be very careful and explicitly ask the user before introducing automatic fallback logic, avoid them as possible.
 - Code that crashes in the production loudly, even at 3am, is still much better than code that silently fails and fakes its success. If something failed, expose it. Write defensive code sparsely, when in doubt, don't do defensive programming.
   * For preconditions that should be impossible given correct program logic, use assertions (or crash), not error-code returns. Graceful error handling is for expected failure modes (I/O, user input, external APIs), not for "this should never happen" branches.
+  * Do not add speculative guards, validation, or special-case branches for inputs that are already semantically valid.
+  * Zero, empty, and similar boundary values are not “cases to handle” if the natural control flow already handles them correctly.
+  * An unnecessary precondition check is itself a bug. If removing a guard leaves behavior correct, the guard should usually not exist.
 - Remove dead/obsolete code during migration. Apply common sense, and when in doubt, assume that you do NOT need to be compatible with old code, unless explicitly requested by the user.
 
 ## Language-specific Guidelines
