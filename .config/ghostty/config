@@ -1,0 +1,48 @@
+font-family = "Iosevka Term"
+font-family = "Noto Sans Mono CJK SC"
+font-size = 12
+
+foreground = e8e8d3
+background = 121212
+cursor-color = 00ff00
+cursor-text = 000000
+
+palette = 0=#1c1c1c
+palette = 1=#b85335
+palette = 2=#799d6a
+palette = 3=#ffb964
+palette = 4=#667899
+palette = 5=#8787af
+palette = 6=#668799
+palette = 7=#dddddd
+palette = 8=#404040
+palette = 9=#cf6a4c
+palette = 10=#99ad6a
+palette = 11=#fad07a
+palette = 12=#8197bf
+palette = 13=#c6b6ee
+palette = 14=#8fbfdc
+palette = 15=#e8e8d3
+
+window-width = 240
+window-height = 72
+scrollback-limit = 8388608
+scrollbar = never
+
+window-padding-x = 0
+window-padding-y = 0
+window-padding-balance = false
+
+copy-on-select = clipboard
+right-click-action = paste
+link-url = true
+link-previews = false
+selection-word-chars = " \t\n{}[]()\"'`│"
+
+window-decoration = auto
+gtk-titlebar = true
+gtk-titlebar-style = tabs
+window-show-tab-bar = auto
+macos-titlebar-style = tabs
+macos-window-buttons = visible
+
