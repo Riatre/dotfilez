@@ -1,6 +1,6 @@
 font-family = "Iosevka Term"
 font-family = "Noto Sans Mono CJK SC"
-font-size = 12
+font-size = 15
 
 foreground = e8e8d3
 background = 121212
@@ -27,7 +27,6 @@ palette = 15=#e8e8d3
 window-width = 240
 window-height = 72
 scrollback-limit = 8388608
-scrollbar = never
 
 window-padding-x = 0
 window-padding-y = 0
@@ -37,7 +36,6 @@ copy-on-select = clipboard
 right-click-action = paste
 link-url = true
 link-previews = false
-selection-word-chars = " \t\n{}[]()\"'`│"
 
 window-decoration = auto
 gtk-titlebar = true
