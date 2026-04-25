@@ -8,3 +8,5 @@ compile_commands.json
 .claude/settings.local.json
 .cache
 __pycache__
+# Bullshit, remove after https://github.com/openai/codex/pull/16930 gets merged.
+.codex
