@@ -1,0 +1,3 @@
+[submodule ".config/vendor/agentkit"]
+	path = .config/vendor/agentkit
+	url = https://github.com/joshuadavidthomas/agentkit.git
