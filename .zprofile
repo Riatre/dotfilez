@@ -50,6 +50,7 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   $HOME/{.local,.cargo,.go}/bin
+  $HOME/.local/share/pnpm/bin
   /usr/local/{,s}bin(N)
   $path
 )
