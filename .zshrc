@@ -296,6 +296,10 @@ if (( $+commands[git-branchless] )); then
     }
 fi
 
+if (( $+commands[container] )); then
+    alias ac='container'
+fi
+
 function mkcd() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 
 function clcd() {
